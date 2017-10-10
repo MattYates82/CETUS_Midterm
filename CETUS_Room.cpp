@@ -3,14 +3,16 @@
 
 using std::endl;
 using std::cout;
+using std::string;
 
-void Room::Room(){
+
+Room::Room(){
 	
-	visited = false;
+	this->visited = false;
+	this->neighbors = NULL;
 	return;
 	
 }
-
 
 void Room::addDescriptions(string longDesc, string shortDesc){
 	
@@ -34,9 +36,9 @@ void Room::removeItem(Item* current){
 	
 }
 
-void Room::addNeighbor(int direction, Room* neigbor){
+void Room::addNeighbor(int direction, Room* neighbor){
 	
-	this->neighbors.addAdjacent(direction, neighbor);
+	this->neighbors->addAdjacent(direction, neighbor);
 	return;
 	
 }
@@ -54,10 +56,17 @@ void Room::printShort(){
 	return;
 	
 }
-
+/*
 void Room::getNeighbors(){
 	
-	this->neighbors.printAllAdjacent();
+	this->neighbors->printAllAdjacent();
 	return;
 	
+}*/
+
+void Room::createNeighbors(List* neighborList){
+	
+	this->neighbors = neighborList;
+	
 }
+

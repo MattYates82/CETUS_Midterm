@@ -1,27 +1,30 @@
 #include <string>
-#include "CETUS_Room.hpp"
 #include <iostream>
 
 #ifndef CETUS_LIST_HPP
 #define CETUS_LIST_HPP
 
+using std::string;
+
+class Room;
+
 class List{
 	
-	private:
-	
+		
+	public:
+
 		Room* north;
 		Room* south;
 		Room* east;
-		Room* west; 
-		
-	public:
+		Room* west;
 	
 		List();
 		~List();
-		void List::addAdjacent(int direction, Room* current)
-		Room* List::printAdjacent(int direction);
-		void List::switchAdjacent(int first, int second);
-		void List::printAllAdjacent();
+		void addAdjacent(int direction, Room* current);
+		Room* printAdjacent(int direction);
+		void switchAdjacent(int first, int second);
+		//void printAllAdjacent();
+		
 	
 };
 
