@@ -10,25 +10,26 @@ WEST 3
 
 using std::endl;
 using std::cout;
+using std::string;
 
 List::List(){
 	
-	north = NULL;
-	south = NULL;
-	east = NULL;
-	west = NULL;
-	
+	this->north = NULL;
+	this->south = NULL;
+	this->east = NULL;
+	this->west = NULL;
+
 }
 
 List::~List(){
 
-		if (north != NULL){ delete north;}
+		if (this->north != NULL){ delete this->north;}
 		
-		if (south != NULL){ delete south;}
+		if (this->south != NULL){ delete this->south;}
 		
-		if (east != NULL){ delete east;}
+		if (this->east != NULL){ delete this->east;}
 		
-		if (west != NULL){ delete west;}
+		if (this->west != NULL){ delete this->west;}
 	
 }
 
@@ -86,7 +87,7 @@ Room* List::printAdjacent(int direction){
 	
 	}
 	
-	return;	
+	return NULL;	
 	
 }
 //to be used when dimension changes, quick way to alter the adjacency list for each room
@@ -206,28 +207,28 @@ void List::switchAdjacent(int first, int second){
 	
 }
 
-void List::printAllAdjacent(){
+/*void List::printAllAdjacent(){
 	
-	if (north != NULL){ 
+	if (this->north != NULL){ 
 	
 		cout<<"North - ";
-		cout<<north->shortDesc<<endl;
+		this->north->printShort();
 		}
 		
-	if (south != NULL){ 
+	if (this->south != NULL){ 
 	
 		cout<<"South - ";
-		cout<<south->shortDesc<<endl;}
+		this->south->printShort();}
 		
-	if (east != NULL){ 
+	if (this->east != NULL){ 
 	
 		cout<<"East - ";
-		cout<<east->shortDesc<<endl;}
+		this->east->printShort();}
 		
-	if (west != NULL){ 
+	if (this->west != NULL){ 
 	
 		cout<<"West - ";
-		cout<<west->shortDesc<<endl;}
+		this->west->printShort();}
 		
 	return;
-}
+}*/

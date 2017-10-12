@@ -21,9 +21,9 @@ class World {
 	public:
 	
 		World::World();
-		int		World::createRooms();
-		int		World::createPlayer();
-		int 	World::dropItems();
+		int	createRooms();
+		int	createPlayer();
+		int dropItems();
 			
 	
 	
