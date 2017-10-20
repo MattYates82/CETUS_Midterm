@@ -60,6 +60,13 @@ using std::string;
 		return this->currentRoom;
 		
 	}
+	
+	int Player::getSpecialItemCount(){
+		
+		return this->specialItemCount;
+		
+	}
+	
 	int Player::addItem(Item* current){
 		
 		this->inventory.push_back(current);
@@ -84,7 +91,12 @@ using std::string;
 	}
 	int Player::resurrectPlayer(Room* current){
 		
-		return 0;
+		this->health = 100;
+		this->movesCompleted = 0;
+		this->currentRoom = current;
+		this->currentNeighbors = current->getNeighbors();
+		this->specialItemCount = 0;
+		return;
 		
 	}
 	int Player::damagePlayer(int damage){

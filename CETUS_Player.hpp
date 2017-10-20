@@ -30,6 +30,7 @@ class Player{
 		int getHealth();
 		int getMovesCompleted();
 		Room*	getCurrentRoom();
+		void getSpecialItemCount();
 		void setCurrent(Room* current);
 		int addItem(Item* current);
 		int dropItem(Item* current);
