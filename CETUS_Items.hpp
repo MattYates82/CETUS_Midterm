@@ -11,6 +11,7 @@ class Item {
 	
 		string	Name;
 		string	Description;
+		string 	roomDescription;
 		int		Power;
 		int		Healing;
 		bool	weapon;
@@ -20,11 +21,12 @@ class Item {
 	public:
 	
 		Item();
-		Item(string Name, string Description, int Power, int Healing, bool weapon);
+		Item(string Name, string Description, string roomDesc, int Power, int Healing, bool weapon);
 		~Item();
 		int damageItem(int damage);
 		string getName();
 		string getDescription();
+		string getRoomDescription();
 		int getPower();
 		int getHealing();
 		bool getWeapon();

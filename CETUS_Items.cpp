@@ -7,6 +7,7 @@ Item::Item(){
 	
 	this->Name = '';
 	this->Description = '';
+	this->roomDescription = '';
 	this->Power = 0;
 	this->Healing = 0;
 	this->weapon = false;
@@ -16,10 +17,11 @@ Item::Item(){
 		
 }
 
-Item::Item(string newName, string newDesc, int newPower, int newHealing, bool newWeapon, bool feature, bool collect){
+Item::Item(string newName, string newDesc, string roomDesc int newPower, int newHealing, bool newWeapon, bool feature, bool collect){
 	
 	this->Name = newName;
 	this->Description = newDesc;
+	this->roomDescription = roomDesc;
 	this->Power = newPower;
 	this->Healing = newHealing;
 	this->weapon = newWeapon;
@@ -39,6 +41,12 @@ string Item::getName(){
 string Item::getDescription(){
 	
 	return this->Desciption;
+	
+}
+
+string Item::getRoomDescription(){
+	
+	return this->roomDesciption;
 	
 }
 
