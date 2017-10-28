@@ -81,7 +81,7 @@ bool Item::getCollectible(){
 	
 }
 
-int Item::damageItem(int damage){
+void Item::damageItem(int damage){
 	
 	this->Power -= damage;
 	if (this->Power < 0){

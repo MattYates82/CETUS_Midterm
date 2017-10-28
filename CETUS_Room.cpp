@@ -7,11 +7,15 @@ using std::string;
 
 
 Room::Room(){
-	
+
 	this->visited = false;
 	this->neighbors = NULL;
 	return;
 	
+}
+
+string Room::getName(){
+	return this->Name;
 }
 
 void Room::addDescriptions(string longDesc, string shortDesc){
@@ -82,7 +86,7 @@ void Room::setVisited(bool visit){
 	
 }
 
-/*Item* Room::findItem(string current){
+Item* Room::findItem(string current){
 	
 	for (int i = 0; i < this->roomItems.size(); i++){
 	
@@ -95,4 +99,8 @@ void Room::setVisited(bool visit){
 
 	return NULL;
 		
-}*/  //Returning error for using an incomplete type here, may need to move this functionality to the overall world. 
+}
+
+int Room::getVisited(){
+    return this->visited;
+}

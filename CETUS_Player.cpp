@@ -70,7 +70,7 @@ using std::string;
 		
 	}
 	
-	int Player::addItem(Item* current){
+	void Player::addItem(Item* current){
 		
 		this->inventory.push_back(current);
 		
@@ -164,38 +164,38 @@ using std::string;
 		
 		if (this->currentRoom->neighbors->north != NULL){
 			
-			cout << this->currentRoom->neighbors->north->Name << endl;
+            cout << "North: "<< this->currentRoom->neighbors->north->Name << endl;
 			
 		}
 		
 		if (this->currentRoom->neighbors->south != NULL){
 			
-			cout << this->currentRoom->neighbors->south->Name << endl;
+			cout << "South: "<< this->currentRoom->neighbors->south->Name << endl;
 			
 		}
 		
 		if (this->currentRoom->neighbors->east != NULL){
 			
-			cout << this->currentRoom->neighbors->east->Name << endl;
+			cout <<  "East: "<<this->currentRoom->neighbors->east->Name << endl;
 			
 		}
 		
 		if (this->currentRoom->neighbors->west != NULL){
 			
-			cout << this->currentRoom->neighbors->west->Name << endl;
+			cout << "West: "<< this->currentRoom->neighbors->west->Name << endl;
 			
 		}
 		
 		
 		if (this->currentRoom->neighbors->up != NULL){
 			
-			cout << this->currentRoom->neighbors->up->Name << endl;
+			cout << "Up: "<< this->currentRoom->neighbors->up->Name << endl;
 			
 		}
 		
 		if (this->currentRoom->neighbors->down != NULL){
 			
-			cout << this->currentRoom->neighbors->down->Name << endl;
+			cout << "Down: "<< this->currentRoom->neighbors->down->Name << endl;
 			
 		}
 		
@@ -311,6 +311,7 @@ using std::string;
 			default:
 				break;
 			
-		}		
+		}
+        
 		return;
 	}

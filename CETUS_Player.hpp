@@ -34,7 +34,7 @@ class Player{
 		Room*	getCurrentRoom();
 		int getSpecialItemCount();
 		void setCurrentRoom(Room* current);
-		int addItem(Item* current);
+		void addItem(Item* current);
 		int dropItem(string current);
 		int incrementMoves();
 		int decrementMoves();

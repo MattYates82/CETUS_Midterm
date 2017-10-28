@@ -24,7 +24,7 @@ class Item {
 		Item();
 		Item(string Name, string Description, string roomDesc, int Power, int Healing, bool weapon, bool feature, bool collect);
 		~Item();
-		int damageItem(int damage);
+		void damageItem(int damage);
 		string getName();
 		string getDescription();
 		string getRoomDescription();
