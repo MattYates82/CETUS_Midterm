@@ -13,6 +13,9 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <iomanip>
+#include <cstdlib>
+//#include <windows.h>
 
 #include "CETUS_data.hpp"
 #include "CETUS_Items.hpp"
@@ -21,6 +24,7 @@
 #include "creature.hpp"
 #include "ghost.hpp"
 #include "battle.hpp"
+#include "CETUS_Print.hpp"
 
 using std::cout;
 using std::cin;
@@ -44,20 +48,24 @@ using std::map;
 //functions to create verb and noun lists for searching
 
 void helper(){
-    string spacer = "     [";
-    cout << "\nCommand Help List\n-----------------\n";
+
+    cout << yellow; 
+    string spacer = "\t\t\t\t[";
+    cout << "\nCommand Help List\n----------------------------------------------------------------------------------\n";
     cout << "Quit" << spacer << "Exits the game.]\n";
     cout << "Look" << spacer << "View the room and objects in the current area.]\n";
-    cout << "Look At <object>" << spacer << "Inspect the <object>.]\n";
-    cout << "Attack <target>" << spacer << "Tries to punch <target> with fists.]\n";
-    cout << "Attack <target> with <object>" << spacer << "Hit <target> with <object>.]\n";
-    cout << "North/South/East/West/Up/Down" << spacer << "Move in that direction.]\n";
-    cout << "Take <object>" << spacer << "Try to pick up <object>.]\n";
-    cout << "Drop <object>" << spacer << "Drop <object> from inventory.]\n";
-    cout << "Inventory" << spacer << "Browse contents of inventory.]\n";
-    cout << "Savegame" << spacer << "Saves current game progress.]\n";
-    cout << "Loadgame" << spacer << "Loads last saved state.]\n";
-    cout << "-----------------\n";
+    cout << "Look At <object>" << "\t\t["  << "Inspect the <object>.]\n";
+    cout << "Attack <target>" << "\t\t\t[" << "Tries to punch <target> with fists.]\n";
+    cout << "Attack <target> with <object>\t[" << "Hit <target> with <object>.]\n";
+    cout << "North/South/East/West/Up/Down\t[" << "Move in that direction.]\n";
+    cout << "Take <object>" << "\t\t\t[" << "Try to pick up <object>.]\n";
+    cout << "Drop <object>" << "\t\t\t[" << "Drop <object> from inventory.]\n";
+    cout << "Inventory" << "\t\t\t[" << "Browse contents of inventory.]\n";
+    cout << "Savegame" << "\t\t\t[" << "Saves current game progress.]\n";
+    cout << "Loadgame" << "\t\t\t[" << "Loads last saved state.]\n";
+    cout << "----------------------------------------------------------------------------------\n";
+    cout << reset;
+
 }
 
 void mapMaker(std::map<std::string, int> *map){
@@ -92,6 +100,9 @@ void mapMaker(std::map<std::string, int> *map){
 }
 
 void displayRoom(Player* player, int look){
+    
+    string temp;
+
     cout << "\n" << player->getCurrentRoom()->getName() << std::endl << std::endl;
     if((player->getCurrentRoom()->getVisited()==true) && (look==0)){
         player->getCurrentRoom()->getShort();
@@ -107,6 +118,7 @@ void displayRoom(Player* player, int look){
 
 
 int parser(Player* player){
+    
     
     //create variables to simulate a room, actions, items, etc
     std::string input, first, verb;
@@ -357,7 +369,9 @@ int main() {
      std::cout << "weapon = " << itemMap["test"]->getWeapon() << std::endl;
      std::cout << "roomFeature = " << itemMap["test"]->getRoomFeature() << std::endl;
      std::cout << "collectible = " << itemMap["test"]->getCollectible() << std::endl;*/
+
     
+        
     std::string location = "source";
     const int itemNum = 9;//set number of item files for array access
     const int roomNum = 5;//set number of room files for array access
@@ -397,9 +411,15 @@ int main() {
     //create Player object
     fileLocation = "./" + location + "/player.txt";
     curPlayer = loadPlayer(fileLocation, &roomMap, itemMap);
-    
+    ClearScreen();
+    string intro = "Welcome to the CETUS CMD1 Midpoint demonstration! Today, you will be able to see our data parser, command parser and data structures in action; however, full functionality won't be available at this time. Some features that will be coming soon include: \n-Save option\n-Scary creatures and other unknown entities\n-Combat system\n-World flipping alternate dimensions\n-Additional items and rooms\n-Plot enhancements & more!\n";
+    string* temp = &intro;
+
+    printLogo();
+    cetusPrint(temp, 3);
+   
     parser(&curPlayer);
-    
+
     return 0;
 }
 

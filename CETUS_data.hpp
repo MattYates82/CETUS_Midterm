@@ -5,6 +5,7 @@
 **Description:  data.hpp File for CMD1 project.  Data files will control game
 **data input from source files and data output to save files
 ****************************************************************************/
+
 #ifndef CETUS_DATA_HPP
 #define CETUS_DATA_HPP
 #include <iostream>
@@ -17,7 +18,6 @@
 #include "CETUS_Player.hpp"
 #include "CETUS_Room.hpp"
 //#include "CETUS_World.hpp"
-
 //Control Functions
 //World loadWorld(std::string location);//takes source or save to determine load location
 //void saveWorld(World gameState);//saves current game state to save location
