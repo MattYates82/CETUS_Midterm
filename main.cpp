@@ -21,10 +21,17 @@
 #include "CETUS_Items.hpp"
 #include "CETUS_Player.hpp"
 #include "CETUS_Room.hpp"
+#include "CETUS_World.hpp"
 #include "creature.hpp"
 #include "ghost.hpp"
 #include "battle.hpp"
-#include "CETUS_Print.hpp"
+
+const std::string red("\033[0;31m");
+const std::string green("\033[1;32m");
+const std::string yellow("\033[1;33m");
+const std::string cyan("\033[0;36m");
+const std::string magenta("\033[0;35m");
+const std::string reset("\033[0m");
 
 using std::cout;
 using std::cin;
@@ -102,7 +109,7 @@ void mapMaker(std::map<std::string, int> *map){
 void displayRoom(Player* player, int look){
     
     string temp;
-
+	cout << red;
     cout << "\n" << player->getCurrentRoom()->getName() << std::endl << std::endl;
     if((player->getCurrentRoom()->getVisited()==true) && (look==0)){
         player->getCurrentRoom()->getShort();
@@ -113,11 +120,13 @@ void displayRoom(Player* player, int look){
     std::cout << "\n\nExits:\n";
     player->printAllAdjacent();
     std::cout << "\n";
+	
+	cout << reset;
 }
 
 
 
-int parser(Player* player){
+int parser(World* game){
     
     
     //create variables to simulate a room, actions, items, etc
@@ -195,7 +204,7 @@ int parser(Player* player){
              }
              */
             if(!found){
-                temp = player->findItem(first,0);
+                temp = game->findItem(first,0);
                 if(temp != NULL){
                     if(!foundNoun1){
                         //printf("Found a noun match!\n");
@@ -214,7 +223,7 @@ int parser(Player* player){
             }
             
             if(!found){
-                temp = player->getCurrentRoom()->findItem(first);
+                temp = game->getCurrentRoom()->findItem(first);
                 if(temp != NULL){
                     if(!foundNoun1){
                         //printf("Found a noun match!\n");
@@ -245,7 +254,7 @@ int parser(Player* player){
             
             choice = mymap.find(verb)->second;
         }
-        
+        cout << cyan;
         switch(choice){
             case 0:  //Quit game
                 std::cout << "So sad to see you leave...\n";
@@ -261,40 +270,40 @@ int parser(Player* player){
                 }
                 break;
             case 2: //North, n
-                player->move(0);
-                displayRoom(player, 0);
+                game->move(0);
+                displayRoom(game, 0);
                 break;
             case 3:  //South, s
-                player->move(1);
-                displayRoom(player, 0);
+                game->move(1);
+                displayRoom(game, 0);
                 break;
                 
             case 4:  //East, e
-                player->move(2);
-                displayRoom(player, 0);
+                game->move(2);
+                displayRoom(game, 0);
                 break;
             case 5:  //West, w
-                player->move(3);
-                displayRoom(player, 0);
+                game->move(3);
+                displayRoom(game, 0);
                 break;
             case 6:  //Up, u
-                player->move(4);
-                displayRoom(player, 0);
+                game->move(4);
+                displayRoom(game, 0);
                 break;
             case 7:  //Down, d
-                player->move(5);
-                displayRoom(player, 0);
+                game->move(5);
+                displayRoom(game, 0);
                 break;
             case 8:  //Grab, Take
                 if(foundRoom && foundNoun1){
-                    player->addItem(noun1);
-                    player->getCurrentRoom()->removeItem(noun1);
+                    game->addItem(noun1);
+                    game->getCurrentRoom()->removeItem(noun1);
                 }else {
                     cout << "I don't see that in the room.\n";
                 }
                 break;
             case 9:  //Inventory, inv
-                player->printInventory();
+                game->printInventory();
                 break;
             case 10:  //Help
                 helper();
@@ -307,29 +316,31 @@ int parser(Player* player){
                 break;
             case 13:  //Look
                 //Display the correct room description.
-                displayRoom(player, 1);
+                displayRoom(game, 1);
                 
                 break;
             case 14:  //Look At
                 if(foundNoun1){
-                    noun1->getDescription();
+                    cout << noun1->getDescription();
                 } else {
                     cout << "I don't know what you want to look at.\n";
                 }
                 break;
             case 15: //Drop
                 if(foundInv && foundNoun1){
-                    player->getCurrentRoom()->addItem(noun1);
-                    player->dropItem(noun2->getName());
+                    game->getCurrentRoom()->addItem(noun1);
+                    game->dropItem(noun2->getName());
                 } else {
                     cout << "I don't see that in your inventory.\n";
                 }
                 break;
             default:
                 std::cout << "I don't know what you are asking for.\n";
+				cout << reset;
         }
+		cout << reset;
     }
-    
+    cout << reset;
     return 0;
     
     
@@ -377,7 +388,7 @@ int main() {
     const int roomNum = 5;//set number of room files for array access
     Item* tempItem;//will be used to temporarily store created items
     Room* tempRoom;//will be used to temporarily store created rooms
-    Player curPlayer;//to hold player object
+    World curGame;//to hold player object
     std::string fileLocation;//will hold file path for data loading
     std::map<std::string, Item*> itemMap;//will store Item pointers for assignment to Rooms
     std::map<std::string, Room*> roomMap;//will store Room pointers for assignment to World
@@ -410,16 +421,16 @@ int main() {
     
     //create Player object
     fileLocation = "./" + location + "/player.txt";
-    curPlayer = loadPlayer(fileLocation, &roomMap, itemMap);
-    ClearScreen();
+    curGame = loadPlayer(fileLocation, &roomMap, itemMap);
+    curGame.ClearScreen();
     string intro = "Welcome to the CETUS CMD1 Midpoint demonstration! Today, you will be able to see our data parser, command parser and data structures in action; however, full functionality won't be available at this time. Some features that will be coming soon include: \n-Save option\n-Scary creatures and other unknown entities\n-Combat system\n-World flipping alternate dimensions\n-Additional items and rooms\n-Plot enhancements & more!\n";
     string* temp = &intro;
 
-    printLogo();
-    cetusPrint(temp, 3);
+    curGame.printLogo();
+    curGame.cetusPrint(temp, 3);
    
-    parser(&curPlayer);
-
+    parser(&curGame);
+    cout << reset;
     return 0;
 }
 

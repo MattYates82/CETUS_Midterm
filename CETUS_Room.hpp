@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <vector>
 #include "CETUS_Items.hpp"
+
 #ifndef CETUS_ROOM_HPP
 #define CETUS_ROOM_HPP
 
@@ -16,6 +17,7 @@ class Room {
 	private:
 	
 		friend class Player;
+		friend class World;
 		string 	Name;
 		string	longDesc;
 		string	shortDesc;

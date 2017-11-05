@@ -91,3 +91,52 @@ void Item::damageItem(int damage){
 	}
 	
 }
+
+void Item::setName(string current){
+	
+	this->Name = current;
+	return;
+	
+}
+void Item::setDescription(string current){
+	
+	this->Description = current;
+	return;
+	
+}
+void Item::setRoomDescription(string current){
+	
+	this->roomDescription = current;
+	return;
+	
+}
+void Item::setPower(int current){
+	
+	this->Power = current;
+	return;
+	
+}
+void Item::setHealing(int current){
+	
+	this->Healing = current;
+	return;
+	
+}
+void Item::setWeapon(bool current){
+	
+	this->weapon = current;
+	return;
+	
+}
+void Item::setRoomFeature(bool current){
+	
+	this->roomFeature = current;
+	return;
+	
+}
+void Item::setCollectible(bool current){
+	
+	this->collectible = current;
+	return;
+	
+}

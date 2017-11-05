@@ -37,6 +37,9 @@ std::map<std::string, std::string> loadFile(std::string fileName) {
 			std::string value;
 			if (std::getline(istring_line, key, '=')) {
 				if (std::getline(istring_line, value)) {
+					if (value[value.size()-1] == '\r') {
+						value.erase(value.size()-1);
+					}
 					myMap[key] = value;
 				}
 			}
@@ -162,23 +165,7 @@ Room* loadRoom(std::string location, std::map<std::string, Item*> itemMap, std::
 **Pre-Condition:  Rooms have been created, adjacency list has been filled
 **Post-Condition:  Rooms have populated neighbor Lists
 ****************************************************************************/
-//commented out code below can be deleted if not needed
-/*void loadList(const std::map<std::string, std::vector<std::string>> *adj, const std::map<std::string, Room*> *roomMap, std::vector<Room*> &rooms){
-	std::string curRoom;//will hold a string denoting the current room being worked on
-	std::string adjRoom;//will hold string denoting an adjacent room to the current room
-	//loop through vector of Room* to fill adjacency lists
-	for (int x = 0; x < rooms.size(); x++) {
-		curRoom = rooms[x]->getName();//assign name of Room being accessed to curRoom
-		List* tempList = new List();
-		rooms[x]->createNeighbors(tempList);
-		//loop through vector in adj
-		//use Name for adj vector to place correct neighbors into rooms[x]
-		for (int y = 0; y < adj->at(curRoom).size(); y++) {
-			adjRoom = adj->at(curRoom)[y];//place an adjacent room name in adjRoom
-			rooms[x]->addNeighbor(y, roomMap->at(adjRoom));
-		}
-	}
-}*/
+
 
 void loadList(std::map<std::string, std::vector<std::string>> *adj, std::map<std::string, Room*> *roomMap){
 
@@ -293,3 +280,95 @@ Player loadPlayer(std::string location, const std::map<std::string, Room*> *room
 
 	return gameWorld;
 }*/
+
+
+/***************************************************************************
+**Function:  saveItem
+**Description:  Save Item object data to .txt file
+**Parameters:  Item object pointer
+**Pre-Condition:  Item object exists
+**Post-Condition:  new .txt file is created with Item data
+****************************************************************************/
+void saveItem(Item *tempItem) {
+	std::map <std::string, std::string> tempMap;
+	std::string saveLocation;
+	tempMap["Name"] = tempItem->getName();
+	tempMap["Description"] = tempItem->getDescription();
+	tempMap["roomDescription"] = tempItem->getRoomDescription();
+	tempMap["Power"] = std::to_string(tempItem->getPower());
+	tempMap["Healing"] = std::to_string(tempItem->getHealing());
+	tempMap["weapon"] = std::to_string(tempItem->getWeapon());
+	tempMap["roomFeature"] = std::to_string(tempItem->getRoomFeature());
+	tempMap["collectible"] = std::to_string(tempItem->getCollectible());
+	saveLocation = "./save/" + tempItem->getName() + ".txt";
+	saveFile(saveLocation, tempMap);
+	return;
+}
+
+
+/***************************************************************************
+**Function:  saveRoom
+**Description:  Save Room object data to .txt file
+**Parameters:  Room object pointer
+**Pre-Condition:  Room object exists
+**Post-Condition:  new .txt file is created with Room data
+****************************************************************************/
+void saveRoom(Room *tempRoom) {
+	std::cout << "Entered Function" << std::endl;
+	std::cout << "Saving " << tempRoom->getName() << std::endl;
+	std::map <std::string, std::string> tempMap;
+	std::string saveLocation;
+	std::vector<Item*> itemVect;
+	std::string itemNum;
+	std::string adjNum;
+	Room *adjRoom;
+	List *neighbors;
+	tempMap["Name"] = tempRoom->getName();
+	tempMap["longDesc"] = tempRoom->saveLongDesc();
+	tempMap["shortDesc"] = tempRoom->saveShortDesc();
+	tempMap["visited"] = std::to_string(tempRoom->getVisited());
+	itemVect = tempRoom->getItems();//get vector of Items in Room
+	for (int i = 1; i <= itemVect.size(); i++) {//initialized i to 1 and used <= to correctly create itemNum for key
+		saveItem(itemVect[i-1]);//save all Items in room as separate .txt file
+		if (i < 10) {//create key for map
+			itemNum = "Item0" + std::to_string(i);
+		}
+		else {
+			itemNum = "Item" + std::to_string(i);
+		}
+		//std::cout << "itemNum = " << itemNum << std::endl;
+		tempMap[itemNum] = itemVect[i-1]->getName();//set map value to Item name
+	}
+
+	std::cout << "Items Created!" << std::endl;
+
+	//get adjacent rooms
+	neighbors = tempRoom->getNeighbors();
+	for (int i = 0; i < 6; i++) {
+		adjNum = "adj" + std::to_string(i);
+		adjRoom = neighbors->getAdjName(i);
+		if (adjRoom != NULL) {
+			tempMap[adjNum] = adjRoom->getName();
+		}
+		else {
+			tempMap[adjNum] = "NULL";
+		}
+	}
+
+	std::cout << "Adjacent Rooms Names Set!" << std::endl;
+
+	saveLocation = "./save/" + tempRoom->getName() + ".txt";
+	saveFile(saveLocation, tempMap);
+}
+
+
+/***************************************************************************
+**Function:  savePlayer
+**Description:  Save Player object data to .txt file
+**Parameters:  Player object
+**Pre-Condition:  Player object exists
+**Post-Condition:  new .txt file is created with Player data
+****************************************************************************/
+void savePlayer(Player tempPlayer) {
+
+}

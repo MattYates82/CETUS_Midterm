@@ -1,9 +1,12 @@
-all: main.cpp CETUS_Room.o CETUS_List.o CETUS_Items.o CETUS_Player.o CETUS_data.o
+all: main.cpp CETUS_data.o CETUS_List.o CETUS_Items.o CETUS_Player.o CETUS_Room.o CETUS_World.o
+	
+	g++ -std=c++11 -o CETUS.o main.cpp CETUS_World.o CETUS_data.o CETUS_List.o CETUS_Items.o CETUS_Player.o CETUS_Room.o  
 
-	g++ -std=c++11 -o CETUS.o main.cpp CETUS_Room.o CETUS_List.o CETUS_Items.o CETUS_Player.o CETUS_data.o 
-
-Room.o: CETUS_Room.cpp
-	g++ -c CETUS_Room.cpp -std=c++11
+World.o: CETUS_World.cpp
+	g++ -c CETUS_World.cpp -std=c++11
+	
+Data.o: CETUS_data.cpp
+	g++ -c CETUS_data.cpp -std=c++11
 
 Items.o: CETUS_Items.cpp
 	g++ -c CETUS_Items.cpp -std=c++11
@@ -14,6 +17,8 @@ List.o: CETUS_List.cpp
 Player.o: CETUS_Player.cpp
 	g++ -c CETUS_Player.cpp -std=c++11
 
-Data.o: CETUS_data.cpp
-	g++ -c CETUS_data.cpp -std=c++11
+Room.o: CETUS_Room.cpp
+	g++ -c CETUS_Room.cpp -std=c++11
 
+clean:
+	$(RM) *.o

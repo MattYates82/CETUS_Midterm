@@ -49,14 +49,14 @@ void Room::removeItem(Item* current){
 
 void Room::getLong(){
 
-		cout<<this->longDesc;
+		cout << this->longDesc;
 		return;
 	
 }
 
 void Room::getShort(){
 
-	cout<<this->shortDesc;
+	cout << this->shortDesc;
 	return;
 	
 }
@@ -90,7 +90,7 @@ Item* Room::findItem(string current){
 	
 	for (int i = 0; i < this->roomItems.size(); i++){
 	
-		if (this->roomItems[i]->getName().compare(current)){
+		if (this->roomItems[i]->getName().compare(0, roomItems[i]->getName().size()-1, current) == 0){
 			
 			return this->roomItems[i];
 		}
