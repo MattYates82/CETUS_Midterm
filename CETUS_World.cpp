@@ -41,6 +41,15 @@ using std::string;
 		
 	}
 	
+	World::World(Room* current, int currentHealth, int currentMoves, int currentSpecialCount){
+		
+		Player temp = Player(current, currentHealth, currentMoves, currentSpecialCount);
+		this->currentPlayer = &temp;
+		this->realWorld = true;
+
+	}
+		
+		
 	string World::getName(){
 		
 		return this->Name;

@@ -104,3 +104,16 @@ Item* Room::findItem(string current){
 int Room::getVisited(){
     return this->visited;
 }
+
+
+std::vector<Item*> Room::getItems() {
+	return this->roomItems;
+}
+
+string Room::saveLongDesc() {
+	return this->longDesc;
+}
+
+string Room::saveShortDesc() {
+	return this->shortDesc;
+}

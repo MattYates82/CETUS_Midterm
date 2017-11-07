@@ -151,3 +151,13 @@ using std::string;
 		this->currentNeighbors = newNeighbors;
 		
 	}
+	std::vector<Item*> Player::getItems(){
+		return this->inventory;
+	}
+	
+	void Player::addItem(Item* current){
+		
+		this->inventory.push_back(current);
+		return;
+		
+	}

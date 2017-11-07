@@ -202,7 +202,7 @@ void loadList(std::map<std::string, std::vector<std::string>> *adj, std::map<std
 **Pre-Condition:  .txt source file exists, itemMap has already been filled, Rooms have been created
 **Post-Condition:  new Player object is created returned
 ****************************************************************************/
-Player loadPlayer(std::string location, const std::map<std::string, Room*> *rooms, std::map<std::string, Item*> itemMap) {
+World loadPlayer(std::string location, const std::map<std::string, Room*> *rooms, std::map<std::string, Item*> itemMap) {
 	//declare variables
 	std::map <std::string, std::string> tempMap;
 	std::map <std::string, std::string>::iterator it;//will be used to find Items in map
@@ -210,7 +210,7 @@ Player loadPlayer(std::string location, const std::map<std::string, Room*> *room
 	tempMap = loadFile(location);//load file data into tempMap
 
 	//call player constructor using tempMap to find current room from map of Room pointers
-	Player tempPlayer(rooms->at(tempMap["currentRoom"]), std::stoi(tempMap["health"]), std::stoi(tempMap["movesCompleted"]), std::stoi(tempMap["specialItemCount"]));
+	World tempPlayer(rooms->at(tempMap["currentRoom"]), std::stoi(tempMap["health"]), std::stoi(tempMap["movesCompleted"]), std::stoi(tempMap["specialItemCount"]));
 
 	//Add functions to populate Name when available
 

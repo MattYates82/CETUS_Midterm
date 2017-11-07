@@ -224,3 +224,28 @@ void List::switchAdjacent(int first, int second){
 	
 }
 
+Room* List::getAdjName(int dir) {
+	Room* tempRoom;
+	switch(dir) {
+		case 0:
+			tempRoom = this->north;
+			break;
+		case 1:
+			tempRoom = this->south;
+			break;
+		case 2:
+			tempRoom = this->east;
+			break;
+		case 3:
+			tempRoom = this->west;
+			break;
+		case 4:
+			tempRoom = this->up;
+			break;
+		case 5:
+			tempRoom = this->down;
+			break;
+	}
+	return tempRoom;
+}
+

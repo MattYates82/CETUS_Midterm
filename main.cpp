@@ -106,7 +106,7 @@ void mapMaker(std::map<std::string, int> *map){
     return;
 }
 
-void displayRoom(Player* player, int look){
+void displayRoom(World* player, int look){
     
     string temp;
 	cout << red;
@@ -143,7 +143,7 @@ int parser(World* game){
     mapMaker(&mymap);
     
     std::stringstream sstream;
-    displayRoom(player, 0);
+    displayRoom(game, 0);
     
     
     

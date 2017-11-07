@@ -48,11 +48,13 @@ class Player{
 		void setMovesCompleted(int moves);
 		void setSpecialItemCount(int count);
 		void setNeighbors(List* newNeighbors);
+		void addItem(Item* current);
 		int incrementMoves();
 		int decrementMoves();
 		int resurrectPlayer(Room* currentR);
 		int damagePlayer(int damage);
 		int healPlayer(int health);
+		std::vector<Item*> getItems();
 	
 };
 

@@ -22,6 +22,7 @@ class World {
 	public:
 	
 		World();
+		World(Room* current, int currentHealth, int currentMoves, int currentSpecialCount);
 		int	createRooms();
 		int	createPlayer();
 		void dropItems();
