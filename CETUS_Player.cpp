@@ -95,7 +95,7 @@ using std::string;
 		
 		for (int i = 0; i < this->inventory.size(); i++){
 			
-			if (this->inventory[i]->getName().compare(current)){
+			if (!this->inventory[i]->getName().compare(current)){
 				
 				Item* temp = this->inventory[i];
 				
@@ -314,4 +314,8 @@ using std::string;
 		}
         
 		return;
+	}
+
+	std::vector<Item*> Player::getItems() {
+		return this->inventory;
 	}

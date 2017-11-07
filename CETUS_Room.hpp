@@ -40,5 +40,8 @@ class Room {
 		List* getNeighbors();
 		Item* findItem(string current);
         int getVisited();
+		std::vector<Item*> getItems();//added for saving
+		string saveLongDesc();//added for saving
+		string saveShortDesc();//added for saving
 };
 #endif

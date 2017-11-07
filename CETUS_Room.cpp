@@ -87,10 +87,9 @@ void Room::setVisited(bool visit){
 }
 
 Item* Room::findItem(string current){
-	
+
 	for (int i = 0; i < this->roomItems.size(); i++){
-	
-		if (this->roomItems[i]->getName().compare(current)){
+		if (!this->roomItems[i]->getName().compare(current)){
 			
 			return this->roomItems[i];
 		}
@@ -103,4 +102,16 @@ Item* Room::findItem(string current){
 
 int Room::getVisited(){
     return this->visited;
+}
+
+std::vector<Item*> Room::getItems() {
+	return this->roomItems;
+}
+
+string Room::saveLongDesc() {
+	return this->longDesc;
+}
+
+string Room::saveShortDesc() {
+	return this->shortDesc;
 }

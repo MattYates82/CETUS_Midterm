@@ -32,4 +32,9 @@ Room* loadRoom(std::string location, std::map<std::string, Item*> itemMap, std::
 Player loadPlayer(std::string location, const std::map<std::string, Room*> *rooms, std::map<std::string, Item*> itemMap);//create Player from .txt file
 void loadList(std::map<std::string, std::vector<std::string>> *adj, std::map<std::string, Room*> *roomMap);//create Lists from data that is already loaded
 
+//Functions to save game object data to .txt files
+void saveItem(Item *tempItem);
+void saveRoom(Room *tempRoom);
+void savePlayer(Player tempPlayer);
+
 #endif
