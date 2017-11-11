@@ -388,7 +388,7 @@ int main() {
     const int roomNum = 5;//set number of room files for array access
     Item* tempItem;//will be used to temporarily store created items
     Room* tempRoom;//will be used to temporarily store created rooms
-    World curGame;//to hold player object
+    World curGame;//to hold world object
     std::string fileLocation;//will hold file path for data loading
     std::map<std::string, Item*> itemMap;//will store Item pointers for assignment to Rooms
     std::map<std::string, Room*> roomMap;//will store Room pointers for assignment to World
@@ -419,9 +419,11 @@ int main() {
     //Populate Room neighbor Lists
     loadList(&adj, &roomMap);
     
-    //create Player object
+    /*//create Player object
     fileLocation = "./" + location + "/player.txt";
-    curGame = loadPlayer(fileLocation, &roomMap, itemMap);
+    */
+	string source = "source";
+	curGame = loadWorld(source);
     curGame.ClearScreen();
     string intro = "Welcome to the CETUS CMD1 Midpoint demonstration! Today, you will be able to see our data parser, command parser and data structures in action; however, full functionality won't be available at this time. Some features that will be coming soon include: \n-Save option\n-Scary creatures and other unknown entities\n-Combat system\n-World flipping alternate dimensions\n-Additional items and rooms\n-Plot enhancements & more!\n";
     string* temp = &intro;

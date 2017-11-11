@@ -36,8 +36,8 @@ using std::string;
 		this->Description = ' ';
 		this->currentPlayer = NULL;
 		this->realWorld = true;
-		this->currentPlayer->setCurrentRoom(NULL);
-		this->currentPlayer->setNeighbors(NULL);		
+		//this->currentPlayer->setCurrentRoom(NULL);
+		//this->currentPlayer->setNeighbors(NULL);		
 		
 	}
 	
@@ -58,7 +58,7 @@ using std::string;
 	
 	string World::getDescription(){
 		
-		this->Description;
+		return this->Description;
 		
 	}
 	
@@ -462,3 +462,12 @@ using std::string;
 		return;
 
 }
+
+
+	int	World::createRooms(std::vector <Room*> rmVect) {
+		this->worldRooms = rmVect;
+	}
+
+	std::vector<Room*> World::getRooms() {
+		return this->worldRooms;
+	}
