@@ -170,9 +170,6 @@ Room* loadRoom(std::string location, std::map<std::string, Item*> itemMap, std::
 
 
 void loadList(std::map<std::string, std::vector<std::string>> *adj, std::map<std::string, Room*> *roomMap){
-
-	//std::cout << "Entered loadList" << std::endl;
-
 	std::string curRoom;//will hold a string denoting the current room being worked on
 	std::string adjRoom;//will hold string denoting an adjacent room to the current room
 	std::map <std::string, Room*>::iterator it;//iterator for roomMap
@@ -189,9 +186,9 @@ void loadList(std::map<std::string, std::vector<std::string>> *adj, std::map<std
 			//std::cout << "adjRoom = " << adjRoom << std::endl;
 			if (adjRoom.compare(0, 4, "NULL") != 0) {
 				//std::cout << "in if statement" << std::endl;
-				tempList->addAdjacent(y, roomMap->at(adjRoom));
+				tempList->addAdjacent(y, roomMap->find(adjRoom)->second);
 			}
-		roomMap->at(curRoom)->createNeighbors(tempList);
+		it->second->createNeighbors(tempList);
 		}
 	}
 }
@@ -204,7 +201,7 @@ void loadList(std::map<std::string, std::vector<std::string>> *adj, std::map<std
 **Pre-Condition:  .txt source file exists, itemMap has already been filled, Rooms have been created
 **Post-Condition:  new Player object is created returned
 ****************************************************************************/
-Player loadPlayer(std::string location, const std::map<std::string, Room*> *rooms, std::map<std::string, Item*> itemMap) {
+Player* loadPlayer(std::string location, const std::map<std::string, Room*> *rooms, std::map<std::string, Item*> itemMap) {
 	//declare variables
 	std::map <std::string, std::string> tempMap;
 	std::map <std::string, std::string>::iterator it;//will be used to find Items in map
@@ -212,7 +209,7 @@ Player loadPlayer(std::string location, const std::map<std::string, Room*> *room
 	tempMap = loadFile(location);//load file data into tempMap
 
 	//call player constructor using tempMap to find current room from map of Room pointers
-	Player tempPlayer(rooms->at(tempMap["currentRoom"]), std::stoi(tempMap["health"]), std::stoi(tempMap["movesCompleted"]), std::stoi(tempMap["specialItemCount"]));
+	Player* tempPlayer = new Player(rooms->at(tempMap["currentRoom"]), std::stoi(tempMap["health"]), std::stoi(tempMap["movesCompleted"]), std::stoi(tempMap["specialItemCount"]));
 
 	//Add functions to populate Name when available
 
@@ -221,7 +218,7 @@ Player loadPlayer(std::string location, const std::map<std::string, Room*> *room
 	it = tempMap.find("Item01");
 	while (it->first.compare(0, 4, "Item") == 0) {
 		std::string itemName = it->second;
-		tempPlayer.addItem(itemMap[itemName]);
+		tempPlayer->addItem(itemMap[itemName]);
 		it++;
 	}
 
@@ -238,21 +235,23 @@ Player loadPlayer(std::string location, const std::map<std::string, Room*> *room
 **Pre-Condition:  .txt source files exist
 **Post-Condition:  new World object is created and returned
 ****************************************************************************/
-/*World loadWorld(std::string location) {
-	const int itemNum = 3;//set number of item files for array access
-	const int roomNum = 2;//set number of room files for array access
+World loadWorld(std::string location) {
+	//Declare Variables
+	const int itemNum = 9;//set number of item files for array access
+    const int roomNum = 5;//set number of room files for array access
 	Item* tempItem;//will be used to temporarily store created items
 	Room* tempRoom;//will be used to temporarily store created rooms
-	Player curPlayer;//to hold player object
-	World gameWorld;//will be returned with full game data
+	Player *curPlayer;//to hold player object
 	std::string fileLocation;//will hold file path for data loading
 	std::map<std::string, Item*> itemMap;//will store Item pointers for assignment to Rooms
 	std::map<std::string, Room*> roomMap;//will store Room pointers for assignment to World
 	std::map<std::string, std::vector<std::string>> adj;//map of vectors to contain room neighbors prior to assigning Lists in Rooms
 	std::string key;//used to set key values for maps
+	std::vector<Room*> rmVect;
+	World gameWorld;
 
 	//create array holding list of all Item files
-	std::string itemList[] = {"Lead_Pipe.txt", "Key.txt", "Shovel.txt"};
+    std::string itemList[] = {"Bar.txt", "Businesses.txt", "Corpse.txt", "Church Gate.txt", "Church Sign.txt", "Old Church.txt", "Lead Pipe.txt", "Key.txt", "Shovel.txt"};
 	//create Item objects and store pointers in map
 	for (int x = 0; x < itemNum; x++) {
 		fileLocation = "./" + location + "/" + itemList[x];
@@ -262,11 +261,11 @@ Player loadPlayer(std::string location, const std::map<std::string, Room*> *room
 	}
 
 	//create array holding list of all Room files
-	std::string roomList[] = {"normStart.txt", "normBar.txt"};
+    std::string roomList[] = {"Main Street.txt", "Churchyard.txt", "Stables.txt", "Training.txt", "Studio.txt"};
 	//create Room objects and store pointers in map
 	for (int x = 0; x < roomNum; x++) {
 		fileLocation = "./" + location + "/" + roomList[x];
-		tempRoom = loadRoom(fileLocation, &itemMap, &adj);
+		tempRoom = loadRoom(fileLocation, itemMap, &adj);
 		key = tempRoom->getName();
 		roomMap[key] = tempRoom;
 	}
@@ -275,13 +274,32 @@ Player loadPlayer(std::string location, const std::map<std::string, Room*> *room
 	loadList(&adj, &roomMap);
 
 	//create Player object
-	fileLocation = "./" + location + "/Player.txt";
-	curPlayer = loadPlayer(fileLocation, &roomMap, &itemMap);
+	fileLocation = "./" + location + "/player.txt";
+	curPlayer = loadPlayer(fileLocation, &roomMap, itemMap);
+
+	//place Room objects in vector
+	std::map<std::string, Room*>::iterator i;
+	for (i = roomMap.begin(); i != roomMap.end(); i++) {
+		rmVect.push_back(i->second);
+	}
 
 	//create and populate world with all above loaded data
+	std::map <std::string, std::string> tempMap;
+	fileLocation = "./" + location + "/world.txt";
+	tempMap = loadFile(fileLocation);
+
+	std::cout << "Map Description: " << tempMap["Description"] << std::endl;
+
+	gameWorld.setName(tempMap["Name"]);
+	gameWorld.setDescription(tempMap["Description"]);
+	gameWorld.setPlayer(curPlayer);
+	gameWorld.setRealWorld(std::stoi(tempMap["realWorld"]));
+	gameWorld.createRooms(rmVect);
+
+	std::cout << gameWorld.getDescription() << std::endl;
 
 	return gameWorld;
-}*/
+}
 
 
 /***************************************************************************
@@ -376,15 +394,15 @@ void saveRoom(Room *tempRoom) {
 **Pre-Condition:  Player object exists
 **Post-Condition:  new .txt file is created with Player data
 ****************************************************************************/
-void savePlayer(Player tempPlayer) {
+void savePlayer(Player *tempPlayer) {
 	std::map <std::string, std::string> tempMap;
 	std::string saveLocation = "./save/player.txt";
 	std::vector<Item*> itemVect;
 	std::string itemNum;
-	tempMap["health"] = std::to_string(tempPlayer.getHealth());
-	tempMap["movesCompleted"] = std::to_string(tempPlayer.getMovesCompleted());
-	tempMap["specialItemCount"] = std::to_string(tempPlayer.getSpecialItemCount());
-	itemVect = tempPlayer.getItems();//get vector of Items in Room
+	tempMap["health"] = std::to_string(tempPlayer->getHealth());
+	tempMap["movesCompleted"] = std::to_string(tempPlayer->getMovesCompleted());
+	tempMap["specialItemCount"] = std::to_string(tempPlayer->getSpecialItemCount());
+	itemVect = tempPlayer->getItems();//get vector of Items in Room
 	for (int i = 1; i <= itemVect.size(); i++) {//initialized i to 1 and used <= to correctly create itemNum for key
 		saveItem(itemVect[i-1]);//save all Items in room as separate .txt file
 		if (i < 10) {//create key for map
@@ -393,9 +411,37 @@ void savePlayer(Player tempPlayer) {
 		else {
 			itemNum = "Item" + std::to_string(i);
 		}
-		//std::cout << "itemNum = " << itemNum << std::endl;
 		tempMap[itemNum] = itemVect[i-1]->getName();//set map value to Item name
 	}
-	tempMap["currentRoom"] = tempPlayer.getCurrentRoom()->getName();
+	tempMap["currentRoom"] = tempPlayer->getCurrentRoom()->getName();
 	saveFile(saveLocation, tempMap);
+}
+
+/***************************************************************************
+**Function:  saveWorld
+**Description:  Control function to save all world data
+**Parameters:  World object
+**Pre-Condition:  World object exists
+**Post-Condition:  new .txt files are created with all World data
+****************************************************************************/
+void saveWorld(World gameState) {
+	std::map <std::string, std::string> tempMap;
+	std::string saveLocation = "./save/world.txt";
+	std::vector<Room*> rmVect;
+
+	//Place data in map for World attributes and save to file
+	tempMap["Name"]=gameState.getName();
+	tempMap["Description"]=gameState.getDescription();
+	tempMap["realWorld"]=std::to_string(gameState.getRealWorld());
+	saveFile(saveLocation, tempMap);
+
+	//Save room data
+	rmVect = gameState.getRooms();
+	for (int i = 0; i < rmVect.size(); i++) {
+		saveRoom(rmVect[i]);
+	}
+
+	//Save player data
+	savePlayer(gameState.getPlayer());
+
 }

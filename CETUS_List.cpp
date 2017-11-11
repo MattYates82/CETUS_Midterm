@@ -224,7 +224,6 @@ void List::switchAdjacent(int first, int second){
 	
 }
 
-
 Room* List::getAdjName(int dir) {
 	Room* tempRoom;
 	switch(dir) {
@@ -249,3 +248,4 @@ Room* List::getAdjName(int dir) {
 	}
 	return tempRoom;
 }
+

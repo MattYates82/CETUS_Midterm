@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <vector>
 #include "CETUS_Items.hpp"
+
 #ifndef CETUS_ROOM_HPP
 #define CETUS_ROOM_HPP
 
@@ -16,6 +17,7 @@ class Room {
 	private:
 	
 		friend class Player;
+		friend class World;
 		string 	Name;
 		string	longDesc;
 		string	shortDesc;
@@ -40,8 +42,8 @@ class Room {
 		List* getNeighbors();
 		Item* findItem(string current);
         int getVisited();
-		std::vector<Item*> getItems();//added for saving
-		string saveLongDesc();//added for saving
-		string saveShortDesc();//added for saving
+		std::vector<Item*> getItems();
+		string saveLongDesc();
+		string saveShortDesc();
 };
 #endif

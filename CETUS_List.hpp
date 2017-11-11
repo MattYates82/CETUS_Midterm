@@ -13,6 +13,7 @@ class List{
 	private:
 	
 		friend class Player;
+		friend class World;
 		Room* north;
 		Room* south;
 		Room* east;
@@ -26,8 +27,7 @@ class List{
 		~List();
 		void addAdjacent(int direction, Room* current);
 		void switchAdjacent(int first, int second);
-		Room* getAdjName(int dir);
-		
+		Room* getAdjName(int dir); 
 		
 };
 

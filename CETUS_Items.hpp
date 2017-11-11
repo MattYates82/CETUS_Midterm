@@ -33,6 +33,14 @@ class Item {
 		bool getWeapon();
 		bool getRoomFeature();
 		bool getCollectible();
+		void setName(string current);
+		void setDescription(string current);
+		void setRoomDescription(string current);
+		void setPower(int current);
+		void setHealing(int current);
+		void setWeapon(bool current);
+		void setRoomFeature(bool current);
+		void setCollectible(bool current);
 	
 };
 #endif
