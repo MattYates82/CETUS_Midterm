@@ -1,10 +1,8 @@
 Name=Studio
-longDesc=This long vacant studio must have been where the training hall owner or staff stayed.  If the bullet holes in the walls and the blood-stained furniture weren’t enough to give it away, the long rotted corpse behind the sofa tells you someone died here. 
-shortDesc=An old studio.
+longDesc=You are in an old studio.  Probably for the training hall people.  There's a body around here somewhere
+shortDesc=An pld studio.
 visited=0
 Item01=Corpse
-Item02=NULL
-Item03=NULL
 adj0=NULL
 adj1=NULL
 adj2=NULL
