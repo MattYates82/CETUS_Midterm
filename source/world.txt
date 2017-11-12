@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 Name=world
 Description=This is a test description for the world
 realWorld=1
+=======
+Name=world
+Description=This is a test description for the world.
+realWorld=1
+>>>>>>> d582392f2b1c338cad16aa276fa7b4eebed3b915
