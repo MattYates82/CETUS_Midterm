@@ -1,4 +1,3 @@
-Name="Cetus"
-Description="The wild and wonderful world of CETUS"
-currentPlayer="Matt"
-realWorld=truex
+Name=world
+Description=The wild and wonderful world of CETUS
+realWorld=0
