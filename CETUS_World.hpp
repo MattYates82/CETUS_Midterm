@@ -23,7 +23,7 @@ class World {
 	
 		World();
 		World(Room* current, int currentHealth, int currentMoves, int currentSpecialCount);
-		int	createRooms();
+		int	createRooms(std::vector <Room*> rmVect);
 		int	createPlayer();
 		void dropItems();
 		void dropItem(Item* current);
@@ -50,6 +50,7 @@ class World {
 		void printLogo();
 		void ClearScreen();
 		void cetusPrint(string* inText, int color);
+		std::vector<Room*> getRooms();
 	
 };
 #endif

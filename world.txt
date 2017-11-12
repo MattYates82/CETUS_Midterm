@@ -1,4 +1,3 @@
-Name=
-Description=
-currentPlayer=
-realWorld=
+Name=world
+Description=The wild and wonderful world of CETUS
+realWorld=0
