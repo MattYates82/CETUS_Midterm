@@ -1,4 +1,3 @@
-
 /****************************************************************************
 **Program Filename:  main.cpp
 **Author:  Jason Fisher
@@ -6,6 +5,8 @@
 **Description:  Used to test function of data.cpp and data.hpp
 ****************************************************************************/
 #include "CETUS_data.hpp"
+
+int parser(World*);
 
 int main() {
 	/*//test create and populate map from loadFile function
@@ -158,16 +159,16 @@ int main() {
 		std::cout << "Item " << y << " collectible Bool = " << playerItems[y]->getCollectible() << std::endl;
 	}*/
 
-	World gameWorld;
-	gameWorld = loadWorld("source");
+	World* gameWorld;
+    gameWorld = loadWorld("source");
 
-	std::cout << gameWorld.getName() << std::endl;
-	std::cout << gameWorld.getDescription() << std::endl;
-	std::cout << gameWorld.getRealWorld() << std::endl << std::endl;
+	std::cout << gameWorld->getName() << std::endl;
+	std::cout << gameWorld->getDescription() << std::endl;
+	std::cout << gameWorld->getRealWorld() << std::endl << std::endl;
 
 	saveWorld(gameWorld);
 
-
+    parser(gameWorld);
 
 	return 0;
 }

@@ -19,8 +19,8 @@
 #include "CETUS_Room.hpp"
 #include "CETUS_World.hpp"
 //Control Functions
-World loadWorld(std::string location);//takes source or save to determine load location
-void saveWorld(World gameState);//saves current game state to save location
+World* loadWorld(std::string location);//takes source or save to determine load location
+void saveWorld(World *gameState);//saves current game state to save location
 
 //Will load source file data into map and return map
 std::map<std::string, std::string> loadFile(std::string);
