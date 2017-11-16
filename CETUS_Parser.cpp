@@ -17,10 +17,11 @@
 #include <cstdlib>
 
 #include "CETUS_World.hpp"
-#include "CETUS_data.hpp"
 #include "CETUS_Items.hpp"
 #include "CETUS_Player.hpp"
 #include "CETUS_Room.hpp"
+#include "CETUS_data.hpp"
+#include "CETUS_World.hpp"
 #include "creature.hpp"
 #include "ghost.hpp"
 #include "battle.hpp"

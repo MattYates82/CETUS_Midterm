@@ -185,7 +185,7 @@ using std::string;
         std::string tempString;
         std::transform(current.begin(), current.end(), current.begin(), ::tolower);
         for (int i = 0; i < this->currentPlayer->currentRoom->roomItems.size(); i++){
-            if(this->currentPlayer->currentRoom->roomItems[i] != nullptr){
+            if(this->currentPlayer->currentRoom->roomItems[i] != NULL){
                 tempString = this->currentPlayer->currentRoom->roomItems[i]->getName();
                 std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
                 if (!tempString.compare(current)){

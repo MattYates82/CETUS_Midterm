@@ -90,7 +90,7 @@ Item* Room::findItem(string current, bool drop){
     std::string tempString;
     std::transform(current.begin(), current.end(), current.begin(), ::tolower);
     for (int i = 0; i < this->roomItems.size(); i++){
-        if(roomItems[i] != nullptr){
+        if(roomItems[i] != NULL){
             tempString = this->roomItems[i]->getName();
             std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
             if (!tempString.compare(current)){
@@ -135,7 +135,7 @@ int Room::invIsEmpty(){
 }
 
 int Room::hasEnemy(){
-    if(this->enemy != nullptr ){
+    if(this->enemy != NULL){
         return 1;
     }else {
         return 0;
