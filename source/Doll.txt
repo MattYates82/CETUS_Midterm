@@ -1,0 +1,9 @@
+ID=Doll
+Name=Doll
+roomDescription= A porcelain doll sits on the edge of a shelf, its eyes intensely starting at you. 
+Description= A old, worn porcelain doll.  The hair is matted and patchy, paint worn, and the eyes don't sit quite right.
+Power=0
+Healing=0
+weapon=0
+roomFeature=1
+collectible=0
