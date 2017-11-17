@@ -10,6 +10,7 @@ Room::Room(){
 
 	this->visited = false;
 	this->neighbors = NULL;
+    this->enemy = NULL;
 	return;
 	
 }
@@ -29,7 +30,7 @@ void Room::addDescriptions(string longDesc, string shortDesc){
 void Room::addItem(Item* current){
 	
 	this->roomItems.push_back(current);
-	
+	cout << "\nYou drop the " << current->getName() << ".\n";
 	return;
 	
 }
@@ -135,7 +136,7 @@ int Room::invIsEmpty(){
 }
 
 int Room::hasEnemy(){
-    if(this->enemy != nullptr ){
+    if(this->enemy != NULL ){
         return 1;
     }else {
         return 0;

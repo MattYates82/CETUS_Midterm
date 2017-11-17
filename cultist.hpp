@@ -1,6 +1,6 @@
 
-#ifndef Ghost_creature
-#define Ghost_creature
+#ifndef cultist_creature
+#define cultist_creature
 
 #include <string>
 #include <cmath>
@@ -9,12 +9,12 @@
 #include "creature.hpp"
 
 
-class Ghost: public Creature{
+class Cultist: public Creature{
 private:
 	
     
 public:
-    Ghost();
+    Cultist();
     int attack();
     string getName();
     void getDesc();

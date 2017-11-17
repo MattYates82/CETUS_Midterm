@@ -69,22 +69,22 @@ World* loadhelper(World* current){
 }
 void helper(){
     
-    cout << yellow;
-    string spacer = "\t\t\t\t[";
+    //cout << yellow;
+    string spacer = "\t\t\t\t\t\t\t[";
     cout << "\nCommand Help List\n----------------------------------------------------------------------------------\n";
     cout << "Quit" << spacer << "Exits the game.]\n";
     cout << "Look" << spacer << "View the room and objects in the current area.]\n";
-    cout << "Look At <object>" << "\t\t["  << "Inspect the <object>.]\n";
-    cout << "Attack <target>" << "\t\t\t[" << "Tries to punch <target> with fists.]\n";
+    cout << "Look At <object>" << "\t\t\t\t["  << "Inspect the <object>.]\n";
+    cout << "Attack <target>" << "\t\t\t\t\t[" << "Tries to punch <target> with fists.]\n";
     cout << "Attack <target> with <object>\t[" << "Hit <target> with <object>.]\n";
     cout << "North/South/East/West/Up/Down\t[" << "Move in that direction.]\n";
-    cout << "Take <object>" << "\t\t\t[" << "Try to pick up <object>.]\n";
-    cout << "Drop <object>" << "\t\t\t[" << "Drop <object> from inventory.]\n";
-    cout << "Inventory" << "\t\t\t[" << "Browse contents of inventory.]\n";
-    cout << "Savegame" << "\t\t\t[" << "Saves current game progress.]\n";
-    cout << "Loadgame" << "\t\t\t[" << "Loads last saved state.]\n";
+    cout << "Take <object>" << "\t\t\t\t\t[" << "Try to pick up <object>.]\n";
+    cout << "Drop <object>" << "\t\t\t\t\t[" << "Drop <object> from inventory.]\n";
+    cout << "Inventory" << "\t\t\t\t\t\t[" << "Browse contents of inventory.]\n";
+    cout << "Savegame" << "\t\t\t\t\t\t[" << "Saves current game progress.]\n";
+    cout << "Loadgame" << "\t\t\t\t\t\t[" << "Loads last saved state.]\n";
     cout << "----------------------------------------------------------------------------------\n";
-    cout << reset;
+    //cout << reset;
     
 }
 
@@ -132,12 +132,13 @@ void displayRoom(World* world, int look){
         player->getCurrentRoom()->setVisited(true);
     }
     
+    
     world->printRoomInventory();//Prints room description of items under room appearance paragraph
     
     
     if(player->getCurrentRoom()->hasEnemy()){
         std::cout <<"\n\n";
-        player->getCurrentRoom()->getEnemy()->getDesc();
+        player->getCurrentRoom()->getEnemy()->getRoomDesc();
     } else {
         cout << "\n";
     }
@@ -373,27 +374,33 @@ int parser(World* world){
                 break;
             case 2: //North, n
                 world->move(0);
+                randomEnemyGenerator(world->getCurrentRoom());
                 displayRoom(world, 0);
                 break;
             case 3:  //South, s
                 world->move(1);
+                randomEnemyGenerator(world->getCurrentRoom());
                 displayRoom(world, 0);
                 break;
                 
             case 4:  //East, e
                 world->move(2);
+                randomEnemyGenerator(world->getCurrentRoom());
                 displayRoom(world, 0);
                 break;
             case 5:  //West, w
                 world->move(3);
+                randomEnemyGenerator(world->getCurrentRoom());
                 displayRoom(world, 0);
                 break;
             case 6:  //Up, u
                 world->move(4);
+                randomEnemyGenerator(world->getCurrentRoom());
                 displayRoom(world, 0);
                 break;
             case 7:  //Down, d
                 world->move(5);
+                randomEnemyGenerator(world->getCurrentRoom());
                 displayRoom(world, 0);
                 break;
             case 8:  //Grab, Take
@@ -431,6 +438,8 @@ int parser(World* world){
             case 14:  //Look At
                 if(foundNoun1){
                     cout << noun1->getDescription() << "\n";
+                }else if(foundEnemy){
+                    baddie->getDesc();
                 } else {
                     cout << "I don't know what you want to look at.\n";
                 }

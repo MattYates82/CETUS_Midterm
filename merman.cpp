@@ -5,7 +5,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-#include "ghost.hpp"
+#include "merman.hpp"
 
 using std::cout;
 using std::cin;
@@ -14,13 +14,13 @@ using std::string;
 
 
 /*********************************************************************
- ** Function: Ghost()
+ ** Function: Merman()
  ** Description: calls base class constructor, then also sets additional value
  ** Parameters: none
  ** Pre-Conditions: subclass object created
  ** Post-Conditions: subclass member variables set
  *********************************************************************/
-Ghost::Ghost(): Creature(3,1, "ghost"){
+Merman::Merman(): Creature(5,1, "merman"){
     
 }
 
@@ -32,9 +32,9 @@ Ghost::Ghost(): Creature(3,1, "ghost"){
  ** Pre-Conditions: subclass object created
  ** Post-Conditions: returns int value
  *********************************************************************/
-int Ghost::attack(){
+int Merman::attack(){
     
-    return rand()%20+1 + 2;
+    return rand()%20+1 + 3;
 
     
 }
@@ -42,12 +42,12 @@ int Ghost::attack(){
 
 /*********************************************************************
  ** Function: getName()
- ** Description: returns name of Ghost object
+ ** Description: returns name of Merman object
  ** Parameters: none
  ** Pre-Conditions: subclass object created
  ** Post-Conditions: string name returned
  *********************************************************************/
-string Ghost::getName(){
+string Merman::getName(){
     return this->name;
 }
 
@@ -58,11 +58,11 @@ string Ghost::getName(){
  ** Pre-Conditions: none
  ** Post-Conditions: none
  *********************************************************************/
-void Ghost::getDesc(){
+void Merman::getDesc(){
     if(this->isDead(0)){
-        cout << "A pile of ectoplasmic goo.  Someone blows their nose, and you wanna look at it?" << endl;
+        cout << "Other than stagnant water, you see no sign of the creature."<< endl;
     } else{
-        cout << "A floating translucent entity hovering just above the floor.  It doesn't look happy." << endl;
+        cout << "A man from the waist up, serpent otherwise.  Red eyes, and nasty claws." << endl;
     }
     return;
 }
@@ -74,11 +74,11 @@ void Ghost::getDesc(){
  ** Pre-Conditions: none
  ** Post-Conditions: none
  *********************************************************************/
-void Ghost::getRoomDesc(){
+void Merman::getRoomDesc(){
     if(this->isDead(0)){
-        cout << "A pile of ectoplasmic goo lies at your feet." << endl;
+        cout << "A puddle of water sits stagnant on the ground."<< endl;
     } else{
-        cout << "A raging Ghost stares at you ready to strike!" << endl;
+        cout << "A Merman stares at you, hissing, with claws out!" << endl;
     }
     return;
 }

@@ -19,12 +19,12 @@ using std::string;
  ** Post-Conditions: subclass member variables set
  *********************************************************************/
 
-Creature::Creature(int arm, int str, string word){
+Creature::Creature(int arm, int str, string newName){
     
     this->armor = arm;
     this->health = str;
-    this->name = word;
-    
+    this->name = newName;
+    this->heldItem = NULL;
 }
 
 /*********************************************************************
@@ -65,12 +65,12 @@ void Creature::defense(int incoming){
     
     //If damage is 0 or less, creature "dodged"
     if(incoming < armor){
-        cout << this->name << " dodged the attack!"<< endl;
+        cout << "The " << this->name << " dodged the attack!"<< endl;
         return;
     }
     
     //If not dodged, apply damage to creature
-    cout << this->name << " took damage!" << endl;
+    cout << "The " << this->name << " was hit!" << endl;
     this->health -= 1;
     return;
     
@@ -86,9 +86,6 @@ void Creature::defense(int incoming){
 bool Creature::isDead(int check = 1){
     
     //Checks if creature is dead.  Shows total health left
-    if(check != 0){
-        cout << this->name << " : " << this->health << " life." << endl;
-    }
     if(this->health <= 0){
         return true;
     } else{
@@ -121,17 +118,6 @@ bool operator==(Creature& left, Creature& right){
 }
 
 /*********************************************************************
- ** Function: healme
- ** Description: adds to health
- ** Parameters: integer val
- ** Pre-Conditions: none
- ** Post-Conditions: health increased
- *********************************************************************/
-void Creature::healme(int val){
-    this->health += val;
-}
-
-/*********************************************************************
  ** Function: getHP
  ** Description: returns value of health
  ** Parameters: none
@@ -141,3 +127,21 @@ void Creature::healme(int val){
 int Creature::getHP(){
     return health;
 }
+
+/*********************************************************************
+ ** Function: dropItem
+ ** Description: returns heldItem and removes from enemy
+ ** Parameters: none
+ ** Pre-Conditions: none
+ ** Post-Conditions: none
+ *********************************************************************/
+Item* Creature::dropItem(){
+    if(heldItem != NULL){
+        Item* tempItem = this->heldItem;
+        this->heldItem = NULL;
+        return tempItem;
+    } else {
+        return NULL;
+    }
+}
+

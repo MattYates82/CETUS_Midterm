@@ -3,7 +3,7 @@
 #define creature_class
 
 #include <string>
-//#include "CETUS_Items.hpp"
+#include "CETUS_Items.hpp"
 using std::string;
 
 class Creature{
@@ -15,8 +15,7 @@ protected:
     int armor;
     int health;
     string name;
-    string desc;
-    
+    Item* heldItem;
     
 public:
     Creature(int, int, string);
@@ -24,12 +23,13 @@ public:
     virtual int attack();
     virtual void defense(int);
     virtual string getName() = 0;  //True virtual function
+    virtual void getRoomDesc() = 0;
     virtual bool isDead(int);
     virtual void adjName(string);
     virtual void getDesc() = 0;
     friend bool operator==(Creature&, Creature&);
-    virtual void healme(int);
     virtual int getHP();
+    virtual Item* dropItem();
     
 };
 

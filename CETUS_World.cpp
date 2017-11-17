@@ -163,7 +163,7 @@ using std::string;
 			tempString = temp->inventory[i]->getName();
 			std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
 			
-			if (tempString.compare(0, tempString.size() -1, current)){
+			if (!tempString.compare(current)){
 				
 				Item* currentItem = temp->inventory[i];
 				
@@ -256,11 +256,11 @@ using std::string;
 			cout << "Player has no items in inventory." << endl;
 			return;
 		}
-		
+        cout << "\nInventory\n---------\n";
 		for (int i = 0; i < temp->inventory.size(); i++){
 			
 			if (temp->inventory[i] != NULL){
-				cout << temp->inventory[i]->getName();
+                cout << temp->inventory[i]->getName() << std::endl;
 			}
 		}
 		
@@ -270,15 +270,13 @@ using std::string;
 	void World::printRoomInventory(){
 		Player* temp = this->currentPlayer;
 		if (temp->currentRoom->roomItems.size() == 0) { 
-		
-			cout << "Player has no items in inventory." << endl;
 			return;
 		}
-		
+		cout << "\n\n";
 		for (int i = 0; i < temp->currentRoom->roomItems.size(); i++){
 			
 			if (temp->currentRoom->roomItems[i] != NULL){
-				cout << temp->currentRoom->roomItems[i]->getName();
+                cout << temp->currentRoom->roomItems[i]->getRoomDescription() << " ";
 			}
 		}
 		
@@ -357,7 +355,7 @@ using std::string;
 			
 			case WEST:
                 if(temp->currentRoom->neighbors->west != NULL){
-                    temp->setCurrentRoom(temp->currentRoom->neighbors->east);
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->west);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");

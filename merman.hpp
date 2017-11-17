@@ -1,6 +1,6 @@
 
-#ifndef Ghost_creature
-#define Ghost_creature
+#ifndef merman_creature
+#define merman_creature
 
 #include <string>
 #include <cmath>
@@ -9,12 +9,12 @@
 #include "creature.hpp"
 
 
-class Ghost: public Creature{
+class Merman: public Creature{
 private:
 	
     
 public:
-    Ghost();
+    Merman();
     int attack();
     string getName();
     void getDesc();
