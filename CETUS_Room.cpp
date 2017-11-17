@@ -10,6 +10,7 @@ Room::Room(){
 
 	this->visited = false;
 	this->neighbors = NULL;
+	this->enemy = NULL;
 	return;
 	
 }

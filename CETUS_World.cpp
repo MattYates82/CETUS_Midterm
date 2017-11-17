@@ -278,7 +278,7 @@ using std::string;
 		for (int i = 0; i < temp->currentRoom->roomItems.size(); i++){
 			
 			if (temp->currentRoom->roomItems[i] != NULL){
-				cout << temp->currentRoom->roomItems[i]->getName();
+				cout << "  " << temp->currentRoom->roomItems[i]->getRoomDescription();
 			}
 		}
 		
@@ -357,7 +357,7 @@ using std::string;
 			
 			case WEST:
                 if(temp->currentRoom->neighbors->west != NULL){
-                    temp->setCurrentRoom(temp->currentRoom->neighbors->east);
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->west);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");
