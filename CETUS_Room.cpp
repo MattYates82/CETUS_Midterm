@@ -34,9 +34,9 @@ void Room::addItem(Item* current){
 	
 }
 
-void Room::removeItem(Item* current){
+Item* Room::removeItem(Item* current){
 	
-	return;
+	return this->findItem(current->getName(), true);
 	
 }
 
@@ -86,19 +86,27 @@ void Room::setVisited(bool visit){
 	
 }
 
-Item* Room::findItem(string current){
-	
-	for (int i = 0; i < this->roomItems.size(); i++){
-	
-		if (this->roomItems[i]->getName().compare(0, roomItems[i]->getName().size()-1, current) == 0){
-			
-			return this->roomItems[i];
-		}
-	
-	}
-
-	return NULL;
-		
+Item* Room::findItem(string current, bool drop){
+    std::string tempString;
+    std::transform(current.begin(), current.end(), current.begin(), ::tolower);
+    for (int i = 0; i < this->roomItems.size(); i++){
+        if(roomItems[i] != NULL){
+            tempString = this->roomItems[i]->getName();
+            std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
+            if (!tempString.compare(current)){
+                
+                Item* temp = this->roomItems[i];
+                
+                if(drop == true){
+                    this->roomItems.erase(this->roomItems.begin()+i);
+                }
+                return temp;
+            }
+        }
+    }
+    
+    return NULL;
+    
 }
 
 int Room::getVisited(){
@@ -116,4 +124,32 @@ string Room::saveLongDesc() {
 
 string Room::saveShortDesc() {
 	return this->shortDesc;
+}
+
+int Room::invIsEmpty(){
+    if( this->roomItems[0]==NULL){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+int Room::hasEnemy(){
+    if(this->enemy != NULL){
+        return 1;
+    }else {
+        return 0;
+    }
+}
+
+void Room::setEnemy(Creature* newEnemy){
+    this->enemy = newEnemy;
+}
+
+Creature* Room::getEnemy(){
+    if(this->hasEnemy()){
+        return this->enemy;
+    } else {
+        return NULL;
+    }
 }

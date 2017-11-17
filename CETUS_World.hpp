@@ -41,7 +41,7 @@ class World {
 		void dropItem(string current);	
 		Item* findItem(string);
 		Item* findItem(string current, bool drop);	
-		Item* findRoomItem(string current);
+		Item* findRoomItem(string current, bool drop);
 		void printAllAdjacent();	
 		void printInventory();
 		void printRoomInventory();

@@ -154,8 +154,9 @@ using std::string;
 	Item* World::findItem(string current, bool drop){
 		
 		string tempString;
-		
-		Player* temp = this->currentPlayer;
+		std::transform(current.begin(), current.end(), current.begin(), ::tolower);
+        
+        Player* temp = this->currentPlayer;
 		
 		for (int i = 0; i < temp->inventory.size(); i++){
 			
@@ -167,7 +168,7 @@ using std::string;
 				Item* currentItem = temp->inventory[i];
 				
 				if(drop == true){
-					temp->inventory[i] = NULL;
+					temp->inventory.erase(temp->inventory.begin()+i);
 				}
 				
 				return currentItem;
@@ -179,16 +180,27 @@ using std::string;
 		
 	}
 	
-	Item* World::findRoomItem(string current){
-		
-		for (int i = 0; i < this->currentPlayer->currentRoom->roomItems.size(); i++){
-			
-			if (this->currentPlayer->currentRoom->roomItems[i]->getName().compare(current)){
+	Item* World::findRoomItem(string current, bool drop){
 				
-				return this->currentPlayer->inventory[i];
-			}
+        std::string tempString;
+        std::transform(current.begin(), current.end(), current.begin(), ::tolower);
+        for (int i = 0; i < this->currentPlayer->currentRoom->roomItems.size(); i++){
+            if(this->currentPlayer->currentRoom->roomItems[i] != NULL){
+                tempString = this->currentPlayer->currentRoom->roomItems[i]->getName();
+                std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
+                if (!tempString.compare(current)){
+                    
+                    Item* temp = this->currentPlayer->currentRoom->roomItems[i];
+                    
+                    if(drop == true){
+                        this->currentPlayer->currentRoom->roomItems.erase(this->currentPlayer->currentRoom->roomItems.begin()+i);
+                    }
+                    return temp;
+                }
+            }
+        }
 			
-		}
+		
 		
 		return NULL;
 		
@@ -317,36 +329,61 @@ using std::string;
 		switch(direction){
 			
 			case NORTH:
-				temp->setCurrentRoom(temp->currentRoom->neighbors->north);
-				temp->setNeighbors(temp->currentRoom->getNeighbors());
+                if(temp->currentRoom->neighbors->north != NULL){
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->north);
+                    temp->setNeighbors(temp->currentRoom->getNeighbors());
+                } else {
+                    printf("\nThere is no apparent exit in that direction.\n");
+                }
 				break;
 			
 			case SOUTH:
-				temp->setCurrentRoom(temp->currentRoom->neighbors->south);
-				temp->setNeighbors(temp->currentRoom->getNeighbors());
+                if(temp->currentRoom->neighbors->south != NULL){
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->south);
+                    temp->setNeighbors(temp->currentRoom->getNeighbors());
+                } else {
+                    printf("\nThere is no apparent exit in that direction.\n");
+                }
 				break;
 			
 			case EAST:
-				temp->setCurrentRoom(temp->currentRoom->neighbors->east);
-				temp->setNeighbors(temp->currentRoom->getNeighbors());
+                if(temp->currentRoom->neighbors->east != NULL){
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->east);
+                    temp->setNeighbors(temp->currentRoom->getNeighbors());
+                } else {
+                    printf("\nThere is no apparent exit in that direction.\n");
+                }
 				break;
 			
 			case WEST:
-				temp->setCurrentRoom(temp->currentRoom->neighbors->east);
-				temp->setNeighbors(temp->currentRoom->getNeighbors());
+                if(temp->currentRoom->neighbors->west != NULL){
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->east);
+                    temp->setNeighbors(temp->currentRoom->getNeighbors());
+                } else {
+                    printf("\nThere is no apparent exit in that direction.\n");
+                }
 				break;
 			
 			case UP:
-				temp->setCurrentRoom(temp->currentRoom->neighbors->up);
-				temp->setNeighbors(temp->currentRoom->getNeighbors());
+                if(temp->currentRoom->neighbors->up != NULL){
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->up);
+                    temp->setNeighbors(temp->currentRoom->getNeighbors());
+                } else {
+                    printf("\nThere is no apparent exit in that direction.\n");
+                }
 				break;
 			
 			case DOWN:
-				temp->setCurrentRoom(temp->currentRoom->neighbors->down);
-				temp->setNeighbors(temp->currentRoom->getNeighbors());
+                if(temp->currentRoom->neighbors->down != NULL){
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->down);
+                    temp->setNeighbors(temp->currentRoom->getNeighbors());
+                } else {
+                    printf("\nThere is no apparent exit in that direction.\n");
+                }
 				break;
 			
 			default:
+                printf("\nThat is not a valid direction.\n");
 				break;
 			
 		}
@@ -466,6 +503,7 @@ using std::string;
 
 	int	World::createRooms(std::vector <Room*> rmVect) {
 		this->worldRooms = rmVect;
+        return 0;
 	}
 
 	std::vector<Room*> World::getRooms() {

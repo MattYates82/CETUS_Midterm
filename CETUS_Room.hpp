@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <vector>
 #include "CETUS_Items.hpp"
+#include "creature.hpp"
 
 #ifndef CETUS_ROOM_HPP
 #define CETUS_ROOM_HPP
@@ -24,7 +25,7 @@ class Room {
 		bool	visited;
 		std::vector<Item*> roomItems;
 		List* 	neighbors;
-			
+        Creature* enemy;
 	public:
 	
 		Room();
@@ -32,7 +33,7 @@ class Room {
 		string getName();
 		void addDescriptions(string longDesc, string shortDesc);
 		void addItem(Item* current);
-		void removeItem(Item* current);
+		Item* removeItem(Item* current);
 		//void addNeighbor(int direction, Room* neigbor);
 		void createNeighbors(List* neighborList);
 		void getLong();
@@ -40,10 +41,14 @@ class Room {
 		void setName(string currentName);
 		void setVisited(bool visit);
 		List* getNeighbors();
-		Item* findItem(string current);
+		Item* findItem(string current, bool drop);
         int getVisited();
 		std::vector<Item*> getItems();
 		string saveLongDesc();
 		string saveShortDesc();
+        int invIsEmpty(); //checking room inventory
+        int hasEnemy();
+        void setEnemy(Creature*);
+        Creature* getEnemy();
 };
 #endif

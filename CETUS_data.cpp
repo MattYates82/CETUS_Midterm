@@ -235,7 +235,7 @@ Player* loadPlayer(std::string location, const std::map<std::string, Room*> *roo
 **Pre-Condition:  .txt source files exist
 **Post-Condition:  new World object is created and returned
 ****************************************************************************/
-World loadWorld(std::string location) {
+World* loadWorld(std::string location) {
 	//Declare Variables
 	const int itemNum = 9;//set number of item files for array access
     const int roomNum = 5;//set number of room files for array access
@@ -248,7 +248,7 @@ World loadWorld(std::string location) {
 	std::map<std::string, std::vector<std::string>> adj;//map of vectors to contain room neighbors prior to assigning Lists in Rooms
 	std::string key;//used to set key values for maps
 	std::vector<Room*> rmVect;
-	World gameWorld;
+	World *gameWorld = new World;
 
 	//create array holding list of all Item files
     std::string itemList[] = {"Bar.txt", "Businesses.txt", "Corpse.txt", "Church Gate.txt", "Church Sign.txt", "Old Church.txt", "Lead Pipe.txt", "Key.txt", "Shovel.txt"};
@@ -290,13 +290,13 @@ World loadWorld(std::string location) {
 
 	std::cout << "Map Description: " << tempMap["Description"] << std::endl;
 
-	gameWorld.setName(tempMap["Name"]);
-	gameWorld.setDescription(tempMap["Description"]);
-	gameWorld.setPlayer(curPlayer);
-	gameWorld.setRealWorld(std::stoi(tempMap["realWorld"]));
-	gameWorld.createRooms(rmVect);
+	gameWorld->setName(tempMap["Name"]);
+	gameWorld->setDescription(tempMap["Description"]);
+	gameWorld->setPlayer(curPlayer);
+	gameWorld->setRealWorld(std::stoi(tempMap["realWorld"]));
+	gameWorld->createRooms(rmVect);
 
-	std::cout << gameWorld.getDescription() << std::endl;
+	std::cout << gameWorld->getDescription() << std::endl;
 
 	return gameWorld;
 }
@@ -424,24 +424,24 @@ void savePlayer(Player *tempPlayer) {
 **Pre-Condition:  World object exists
 **Post-Condition:  new .txt files are created with all World data
 ****************************************************************************/
-void saveWorld(World gameState) {
+void saveWorld(World *gameState) {
 	std::map <std::string, std::string> tempMap;
 	std::string saveLocation = "./save/world.txt";
 	std::vector<Room*> rmVect;
 
 	//Place data in map for World attributes and save to file
-	tempMap["Name"]=gameState.getName();
-	tempMap["Description"]=gameState.getDescription();
-	tempMap["realWorld"]=std::to_string(gameState.getRealWorld());
+	tempMap["Name"]=gameState->getName();
+	tempMap["Description"]=gameState->getDescription();
+	tempMap["realWorld"]=std::to_string(gameState->getRealWorld());
 	saveFile(saveLocation, tempMap);
 
 	//Save room data
-	rmVect = gameState.getRooms();
+	rmVect = gameState->getRooms();
 	for (int i = 0; i < rmVect.size(); i++) {
 		saveRoom(rmVect[i]);
 	}
 
 	//Save player data
-	savePlayer(gameState.getPlayer());
+	savePlayer(gameState->getPlayer());
 
 }

@@ -6,9 +6,11 @@
 ****************************************************************************/
 #include "CETUS_data.hpp"
 
+int parser(World*);
+
 int main() {
-	/*//test create and populate map from loadFile function
-	std::map <std::string, std::string> testMap;
+	//test create and populate map from loadFile function
+	/*std::map <std::string, std::string> testMap;
 	testMap = loadFile("./source/room_test.txt");
 
 	//Output map elements to confirm
@@ -25,10 +27,10 @@ int main() {
 	saveFile("./save/test_output.txt", testMap);
 
 
-	std::cout << "Files compiled and ran correctly" << std::endl;*/
+	std::cout << "Files compiled and ran correctly" << std::endl;
 
 	//test Item creation
-	/*std::cout << "Testing Item Creation" << std::endl;
+	std::cout << "Testing Item Creation" << std::endl;
 	std::string location = "./source/item_test.txt";
 	Item* testItem = loadItem(location);
 	std::map<std::string, Item*> itemMap;
@@ -39,10 +41,10 @@ int main() {
 	std::cout << "Healing = " << itemMap["test"]->getHealing() << std::endl;
 	std::cout << "weapon = " << itemMap["test"]->getWeapon() << std::endl;
 	std::cout << "roomFeature = " << itemMap["test"]->getRoomFeature() << std::endl;
-	std::cout << "collectible = " << itemMap["test"]->getCollectible() << std::endl;*/
+	std::cout << "collectible = " << itemMap["test"]->getCollectible() << std::endl;
 
 	//Create Item, Room, and Player objects
-	/*std::string location = "source";
+	std::string location = "source";
 	const int itemNum = 9;//set number of item files for array access
     const int roomNum = 5;//set number of room files for array access
 	Item* tempItem;//will be used to temporarily store created items
@@ -157,16 +159,16 @@ int main() {
 		std::cout << "Item " << y << " collectible Bool = " << playerItems[y]->getCollectible() << std::endl;
 	}*/
 
-	World gameWorld;
-	gameWorld = loadWorld("source");
+	World* gameWorld;
+    gameWorld = loadWorld("source");
 
-	std::cout << gameWorld.getName() << std::endl;
-	std::cout << gameWorld.getDescription() << std::endl;
-	std::cout << gameWorld.getRealWorld() << std::endl << std::endl;
+	std::cout << gameWorld->getName() << std::endl;
+	std::cout << gameWorld->getDescription() << std::endl;
+	std::cout << gameWorld->getRealWorld() << std::endl << std::endl;
 
-	saveWorld(gameWorld);
+	//saveWorld(gameWorld);
 
-
+    parser(gameWorld);
 
 	return 0;
 }

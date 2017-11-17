@@ -55,7 +55,7 @@ class Player{
 		int damagePlayer(int damage);
 		int healPlayer(int health);
 		std::vector<Item*> getItems();
-	
+        int invIsEmpty(); //added to check if inventory empty
 };
 
 #endif
