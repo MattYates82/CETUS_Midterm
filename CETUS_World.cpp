@@ -150,34 +150,35 @@ using std::string;
 		return NULL;
 		
 	}
+
 	
 	Item* World::findItem(string current, bool drop){
-		
-		string tempString;
-		std::transform(current.begin(), current.end(), current.begin(), ::tolower);
-        
-        Player* temp = this->currentPlayer;
-		
-		for (int i = 0; i < temp->inventory.size(); i++){
 			
-			tempString = temp->inventory[i]->getName();
-			std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
+			string tempString;
+			std::transform(current.begin(), current.end(), current.begin(), ::tolower);
 			
-			if (tempString.compare(0, tempString.size() -1, current)){
+			Player* temp = this->currentPlayer;
+			
+			for (int i = 0; i < temp->inventory.size(); i++){
 				
-				Item* currentItem = temp->inventory[i];
+				tempString = temp->inventory[i]->getName();
+				std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
 				
-				if(drop == true){
-					temp->inventory.erase(temp->inventory.begin()+i);
+				if (tempString.compare(0, tempString.size() -1, current)){
+					
+					Item* currentItem = temp->inventory[i];
+					
+					if(drop == true){
+						temp->inventory.erase(temp->inventory.begin()+i);
+					}
+					
+					return currentItem;
 				}
 				
-				return currentItem;
 			}
 			
-		}
-		
-		return NULL;
-		
+			return NULL;
+			
 	}
 	
 	Item* World::findRoomItem(string current, bool drop){

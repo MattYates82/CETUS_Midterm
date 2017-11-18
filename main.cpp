@@ -5,6 +5,12 @@
 **Description:  Used to test function of data.cpp and data.hpp
 ****************************************************************************/
 #include "CETUS_data.hpp"
+const std::string red("\033[0;31m");
+const std::string green("\033[1;32m");
+const std::string yellow("\033[1;33m");
+const std::string cyan("\033[0;36m");
+const std::string magenta("\033[0;35m");
+const std::string reset("\033[0m");
 
 int parser(World*);
 
@@ -161,7 +167,12 @@ int main() {
 
 	World* gameWorld;
     gameWorld = loadWorld("source");
+	gameWorld->ClearScreen();
+	string intro = "Welcome to the CETUS CMD1 Midpoint demonstration! Today, you will be able to see our data parser, command parser and data structures in action; however, full functionality won't be available at this time. Some features that will be coming soon include: \n-Save option\n-Scary creatures and other unknown entities\n-Combat system\n-World flipping alternate dimensions\n-Additional items and rooms\n-Plot enhancements & more!\n";
+    string* temp = &intro;
 
+    gameWorld->printLogo();
+    gameWorld->cetusPrint(temp, 3);
 	std::cout << gameWorld->getName() << std::endl;
 	std::cout << gameWorld->getDescription() << std::endl;
 	std::cout << gameWorld->getRealWorld() << std::endl << std::endl;

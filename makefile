@@ -1,6 +1,6 @@
-all: main.cpp CETUS_data.o CETUS_List.o CETUS_Items.o CETUS_Player.o CETUS_Room.o CETUS_World.o CETUS_Parser.o battle.o
+all: main.cpp Data.o List.o Items.o Player.o Room.o World.o Parser.o battle.o
 	
-	g++ -std=c++11 -o CETUS.o main.cpp CETUS_World.o CETUS_data.o CETUS_List.o CETUS_Items.o CETUS_Player.o CETUS_Room.o CETUS_Parser.o battle.o  
+	g++ -std=c++11 -o cetus main.cpp CETUS_World.o CETUS_data.o CETUS_List.o CETUS_Items.o CETUS_Player.o CETUS_Room.o CETUS_Parser.o battle.o  
 
 battle.o: battle.cpp
 	g++ -c battle.cpp -std=c++11
