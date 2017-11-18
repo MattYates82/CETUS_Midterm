@@ -173,16 +173,23 @@ Creature* enemySearch(Player* player, bool* found, bool* foundEnemy, const strin
 }
 
 void checkPlayerInv(World* world, bool *foundNoun1, bool* foundNoun2, bool* found, bool* foundInv, Item* noun1, Item* noun2, const string first){
-    Item* temp = NULL;
-    if(world->findItem(first,0) != NULL)
-        temp = world->findItem(first,0);
-    if(temp != NULL){
+    
+	Item* temp = nullptr;
+	if (world->findItem(first,0) != nullptr){
+	
+		temp = world->findItem(first,0); 
+	
+	}
+	
+    if(temp != nullptr){
+		//cout << temp->getName();
         if(!(*foundNoun1)){
-            //printf("Found a noun match!\n");
+            //printf("Found a noun match! - Player\n");
             *foundNoun1=true;
             *noun1 = *temp;
             *foundInv = true;
             *found=true;
+			
         } else {
             //printf("Found a second noun match!\n");
             *foundNoun2=true;
@@ -199,7 +206,7 @@ void checkRoomInv(World* world, bool *foundNoun1, bool* foundNoun2, bool* found,
     Item* temp = player->getCurrentRoom()->findItem(first, 0);
     if(temp != NULL){
         if(!(*foundNoun1)){
-            //printf("Found a noun match!\n");
+            printf("Found a noun match! - Room\n");
             *foundNoun1=true;
             *noun1 = *temp;
             *foundRoom = true;
@@ -304,11 +311,13 @@ int parser(World* world){
             //search player inventory
             if(!found && !player->invIsEmpty()){
                 checkPlayerInv(world, &foundNoun1, &foundNoun2, &found, &foundInv, noun1, noun2, first);
-            }
+			}
             
             //search room inventory
             if(!found && !player->getCurrentRoom()->invIsEmpty()){
-                checkRoomInv(world, &foundNoun1, &foundNoun2, &found, &foundRoom, noun1, noun2, first);
+                
+				cout << "checking room inventory." << endl;
+				checkRoomInv(world, &foundNoun1, &foundNoun2, &found, &foundRoom, noun1, noun2, first);
                 
             }
             
@@ -432,6 +441,7 @@ int parser(World* world){
             case 14:  //Look At
                 if(foundNoun1){
                     cout << noun1->getDescription() << "\n";
+					cout << noun1->getName() << endl;
                 } else {
                     cout << "I don't know what you want to look at.\n";
                 }

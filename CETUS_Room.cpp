@@ -90,11 +90,15 @@ void Room::setVisited(bool visit){
 Item* Room::findItem(string current, bool drop){
     std::string tempString;
     std::transform(current.begin(), current.end(), current.begin(), ::tolower);
+	
     for (int i = 0; i < this->roomItems.size(); i++){
-        if(roomItems[i] != NULL){
+		
+		if(roomItems[i] != NULL){
             tempString = this->roomItems[i]->getName();
+			
             std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
-            if (!tempString.compare(current)){
+			
+            if (tempString.compare(0, tempString.size() -1, current)){
                 
                 Item* temp = this->roomItems[i];
                 

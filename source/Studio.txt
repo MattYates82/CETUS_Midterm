@@ -1,6 +1,6 @@
 Name=Studio
 longDesc=You are in an old studio.  Probably for the training hall people.  There's a body around here somewhere
-shortDesc=An pld studio.
+shortDesc=An old studio.
 visited=0
 Item01=Corpse
 adj0=NULL
