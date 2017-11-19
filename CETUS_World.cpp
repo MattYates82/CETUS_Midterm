@@ -140,7 +140,7 @@ using std::string;
 		
 		for (int i = 0; i < this->currentPlayer->inventory.size(); i++){
 			
-			if (this->currentPlayer->inventory[i]->getName().compare(current)){
+			if (!this->currentPlayer->inventory[i]->getName().compare(current)){
 				
 				return this->currentPlayer->inventory[i];
 			}
