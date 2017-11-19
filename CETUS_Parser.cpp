@@ -122,6 +122,8 @@ void mapMaker(std::map<std::string, int> *map){
 }
 
 void displayRoom(World* world, int look){
+	
+	cout << cyan; 
     Player* player = world->getPlayer();
     string temp;
     
@@ -148,6 +150,7 @@ void displayRoom(World* world, int look){
     
     
     std::cout << "\n";
+	cout << reset;
 }
 
 
@@ -206,7 +209,7 @@ void checkRoomInv(World* world, bool *foundNoun1, bool* foundNoun2, bool* found,
     Item* temp = player->getCurrentRoom()->findItem(first, 0);
     if(temp != NULL){
         if(!(*foundNoun1)){
-            printf("Found a noun match! - Room\n");
+            //printf("Found a noun match! - Room\n");
             *foundNoun1=true;
             *noun1 = *temp;
             *foundRoom = true;
@@ -316,7 +319,6 @@ int parser(World* world){
             //search room inventory
             if(!found && !player->getCurrentRoom()->invIsEmpty()){
                 
-				cout << "checking room inventory." << endl;
 				checkRoomInv(world, &foundNoun1, &foundNoun2, &found, &foundRoom, noun1, noun2, first);
                 
             }
@@ -367,9 +369,12 @@ int parser(World* world){
         
         switch(choice){
             case 0:  //Quit game
+				cout << yellow;
                 std::cout << "So sad to see you leave...\n";
-                return 0;
+                cout << reset;
+				return 0;
             case 1:  //Attack, Hit
+				cout << green;
                 if(foundNoun1 && withFlag && foundEnemy && noun1->getWeapon()){
                     battle(player, baddie, noun1->getPower());
                 }else if(foundNoun1 && withFlag && foundEnemy && !noun1->getWeapon()){
@@ -380,6 +385,7 @@ int parser(World* world){
                     cout << "What do you want to attack?\n";
                     
                 }
+				cout << reset;
                 break;
             case 2: //North, n
                 world->move(0);
@@ -407,6 +413,7 @@ int parser(World* world){
                 displayRoom(world, 0);
                 break;
             case 8:  //Grab, Take
+				cout << magenta; 
                 if(foundRoom && foundNoun1 && noun1->getCollectible()){
                     player->addItem(player->getCurrentRoom()->removeItem(noun1));
                     
@@ -415,6 +422,7 @@ int parser(World* world){
                 }else {
                     cout << "I don't see that in the room.\n";
                 }
+				cout << reset;
                 break;
             case 9:  //Inventory, inv
                 world->printInventory();
@@ -439,14 +447,18 @@ int parser(World* world){
                 
                 break;
             case 14:  //Look At
+				cout << yellow;
                 if(foundNoun1){
                     cout << noun1->getDescription() << "\n";
 					cout << noun1->getName() << endl;
                 } else {
                     cout << "I don't know what you want to look at.\n";
                 }
+				
+				cout << reset;
                 break;
             case 15: //Drop
+				cout << yellow;
                 if(foundInv && foundNoun1){
                     world->dropItem(noun1->getName());
                 } else {

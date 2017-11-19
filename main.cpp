@@ -165,7 +165,6 @@ int main() {
 		std::cout << "Item " << y << " collectible Bool = " << playerItems[y]->getCollectible() << std::endl;
 	}*/
 
-	std::cout << "the program has started yo" << std::endl;
 
 	World* gameWorld;
     gameWorld = loadWorld("source");
