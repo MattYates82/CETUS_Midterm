@@ -1,3 +1,0 @@
-Name=world
-Description=This is a test description for the world.
-realWorld=1
