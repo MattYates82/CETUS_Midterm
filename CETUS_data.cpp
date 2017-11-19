@@ -103,8 +103,10 @@ Item* loadItem(std::string location) {
 
 	tempMap = loadFile(location);//load file data into tempMap
 
-	Item* tempItem = new Item(tempMap["Name"], tempMap["Description"], tempMap["roomDescription"], std::stoi(tempMap["Power"]), std::stoi(tempMap["Healing"]), 
+	Item* tempItem = new Item(tempMap["ID"], tempMap["Name"], tempMap["Description"], tempMap["roomDescription"], std::stoi(tempMap["Power"]), std::stoi(tempMap["Healing"]), 
 		std::stoi(tempMap["weapon"]), std::stoi(tempMap["roomFeature"]), std::stoi(tempMap["collectible"]));
+
+	std::cout << tempItem->getID() << " Loaded" << std::endl;
 
 	return tempItem;
 }
@@ -129,6 +131,7 @@ Room* loadRoom(std::string location, std::map<std::string, Item*> itemMap, std::
 	Room* tempRoom = new Room;//create new Room with default constructor
 	tempRoom->addDescriptions(tempMap["longDesc"], tempMap["shortDesc"]);//populate descriptions from tempMap
 	tempRoom->setName(tempMap["Name"]);//set room name from map
+	tempRoom->setID(tempMap["ID"]);//set room ID from map
 	tempRoom->setVisited(std::stoi(tempMap["visited"]));//set room visited bool from map
 
 
@@ -137,8 +140,8 @@ Room* loadRoom(std::string location, std::map<std::string, Item*> itemMap, std::
 	if (tempMap.count("Item01")) {
 		it = tempMap.find("Item01");
 		while (it->first.compare(0, 4, "Item") == 0) {
-			std::string itemName = it->second;
-			tempRoom->addItem(itemMap[itemName]);
+			std::string itemID = it->second;
+			tempRoom->addItem(itemMap[itemID]);
 			it++;
 		}
 	}
@@ -153,7 +156,9 @@ Room* loadRoom(std::string location, std::map<std::string, Item*> itemMap, std::
 		it++;
 	}
 
-	adj->insert(std::pair<string, std::vector<std::string>>(tempMap["Name"], list));
+	adj->insert(std::pair<string, std::vector<std::string>>(tempMap["ID"], list));
+
+	std::cout << tempRoom->getID() << " Loaded" << std::endl;
 
 
 	return tempRoom;
@@ -176,13 +181,13 @@ void loadList(std::map<std::string, std::vector<std::string>> *adj, std::map<std
 	std::map <std::string, std::vector<std::string>>::iterator aI;//iterator for adj
 	//loop through vector of Room* to fill adjacency lists
 	for (it = roomMap->begin(); it != roomMap->end(); it++) {
-		curRoom = it->first;//assign name of Room being accessed to curRoom
+		curRoom = it->first;//assign ID of Room being accessed to curRoom
 		aI = adj->find(curRoom);
 		List* tempList = new List;
 		//loop through vector in adj
-		//use Name for adj vector to place correct neighbors into rooms[x]
+		//use ID for adj vector to place correct neighbors into rooms[x]
 		for (int y = 0; y < aI->second.size(); y++) {
-			adjRoom = aI->second[y];//place an adjacent room name in adjRoom
+			adjRoom = aI->second[y];//place an adjacent room ID in adjRoom
 			//std::cout << "adjRoom = " << adjRoom << std::endl;
 			if (adjRoom.compare(0, 4, "NULL") != 0) {
 				//std::cout << "in if statement" << std::endl;
@@ -211,15 +216,17 @@ Player* loadPlayer(std::string location, const std::map<std::string, Room*> *roo
 	//call player constructor using tempMap to find current room from map of Room pointers
 	Player* tempPlayer = new Player(rooms->at(tempMap["currentRoom"]), std::stoi(tempMap["health"]), std::stoi(tempMap["movesCompleted"]), std::stoi(tempMap["specialItemCount"]));
 
-	//Add functions to populate Name when available
+	std::cout << "Loading player items now" << std::endl;
 
 	//Populate player inventory with Items
 	//set map iterator to first item in map
-	it = tempMap.find("Item01");
-	while (it->first.compare(0, 4, "Item") == 0) {
-		std::string itemName = it->second;
-		tempPlayer->addItem(itemMap[itemName]);
-		it++;
+	if (tempMap.count("Item01")) {
+		it = tempMap.find("Item01");
+		while (it->first.compare(0, 4, "Item") == 0) {
+			std::string itemID = it->second;
+			tempPlayer->addItem(itemMap[itemID]);
+			it++;
+		}
 	}
 
 	return tempPlayer;
@@ -236,9 +243,12 @@ Player* loadPlayer(std::string location, const std::map<std::string, Room*> *roo
 **Post-Condition:  new World object is created and returned
 ****************************************************************************/
 World* loadWorld(std::string location) {
+
+	std::cout << "Entered loadWorld" << std::endl << std::endl;
+
 	//Declare Variables
-	const int itemNum = 9;//set number of item files for array access
-    const int roomNum = 5;//set number of room files for array access
+	const int itemNum = 134;//set number of item files for array access - Will be 133 with full implementation
+    const int roomNum = 62;//set number of room files for array access
 	Item* tempItem;//will be used to temporarily store created items
 	Room* tempRoom;//will be used to temporarily store created rooms
 	Player *curPlayer;//to hold player object
@@ -251,31 +261,64 @@ World* loadWorld(std::string location) {
 	World *gameWorld = new World;
 
 	//create array holding list of all Item files
-    std::string itemList[] = {"Bar.txt", "Businesses.txt", "Corpse.txt", "Church Gate.txt", "Church Sign.txt", "Old Church.txt", "Lead Pipe.txt", "Key.txt", "Shovel.txt"};
+	//Update this list
+    std::string itemList[] = {"Lead Pipe.txt", "normBusinesses.txt", "normCar.txt", "altBusinesses.txt", "altCar.txt", "normBarBodies.txt", "normTables.txt", 
+		"altTables.txt", "altSeats.txt", "normChurchSign.txt", "normChurchGate.txt", "altChurchSign.txt", "altChurchGate.txt", "normChurchBodies.txt", 
+		"normPulpit.txt", "altPews.txt", "altStainedGlass.txt", "normGravestone.txt", "normGrave.txt", "altGravestone.txt", "altGrave.txt", "normStonewall.txt", 
+		"normMausoleum.txt", "altStonewall.txt", "altMausoleum.txt", "normFor1Tree.txt", "normFor1Bodies.txt", "altFor1Tree.txt", "altWoodpile.txt", 
+		"normFor2Tree.txt", "normFor2Marks.txt", "altFor2Tree.txt", "altFor2Thicket.txt", "normCliff.txt", "normOcean.txt", "altCliff.txt", "altOcean.txt", 
+		"normMansGate.txt", "normBarnFeat.txt", "altMansGate.txt", "altBarnFeat.txt", "normTools.txt", "normBench.txt", "altTools.txt", "altBench.txt", 
+		"normStatues.txt", "normPorchSteps.txt", "altStatues.txt", "altPorchSteps.txt", "normPainting1.txt", "normPainting2.txt", "altPainting1.txt", 
+		"altPainting2.txt", "normBookshelves.txt", "normDesk.txt", "altBookshelves.txt", "altDesk.txt", "normFridge.txt", "normCounter.txt", "altFridge.txt", 
+		"altCounter.txt", "normTable.txt", "normChinaCab.txt", "altTable.txt", "altChinaCab.txt", "normServBeds.txt", "normBoxes.txt", "altServBeds.txt", 
+		"altBoxes.txt", "normTV.txt", "normFireplace.txt", "altTV.txt", "altFireplace.txt", "normBannister.txt", "normSteps.txt", "altBannister.txt", "altSteps.txt", 
+		"normMirror.txt", "normDoll.txt", "altMirror.txt", "altDoll.txt", "normTub.txt", "normBathSink.txt", "altTub.txt", "altBathSink.txt", "normWindow.txt", 
+		"normPainting3.txt", "altWindow.txt", "altPainting3.txt", "normShelves.txt", "normMop.txt", "altShelves.txt", "altMop.txt", "normKidsBed.txt", 
+		"normToyChest.txt", "altKidsBed.txt", "altToyChest.txt", "normWineRack.txt", "normDistDust.txt", "altCobwebs.txt", "altWineRack.txt", "normMarkings1.txt", 
+		"normScorchMarks1.txt", "altMarkings1.txt", "altTapestry1.txt", "normMarkings2.txt", "normScorchMarks2.txt", "altMarkings2.txt", "altTapestry2.txt", 
+		"normMarkings3.txt", "normHidOrnStatues.txt", "altMarkings3.txt", "altHidOrnStatues.txt", "normAltar.txt", "normIdol.txt", "altAltar.txt", "altIdol.txt", 
+		"normCobwebs.txt", "normHidStorShelves.txt", "altHidStorShelves.txt", "altHidChest.txt", "normCultBeds.txt", "normCultChests.txt", "altCultBeds.txt", 
+		"altCultChests.txt", "Tome.txt", "Axe.txt", "Bandaid.txt", "Salve.txt", "Trident.txt", "Molotov.txt", "Lighter.txt", "Rag.txt", "Whiskey.txt"};
 	//create Item objects and store pointers in map
 	for (int x = 0; x < itemNum; x++) {
 		fileLocation = "./" + location + "/" + itemList[x];
 		tempItem = loadItem(fileLocation);
-		key = tempItem->getName();
+		key = tempItem->getID();
 		itemMap[key] = tempItem;
 	}
 
+	std::cout << "Items created" << std::endl << std::endl;
+
 	//create array holding list of all Room files
-    std::string roomList[] = {"Main Street.txt", "Churchyard.txt", "Stables.txt", "Training.txt", "Studio.txt"};
+	//Update this list
+    std::string roomList[] = {"normMain.txt", "normBar.txt", "normChurchyard.txt", "normChurch.txt", "normCem1.txt", "normCem2.txt", "normForest1.txt", 
+		"normForest2.txt", "normForest3.txt", "normEntranceway.txt", "normBarn.txt", "normMansion.txt", "normFoyer.txt", "normLibrary.txt", "normKitchen.txt", 
+		"normDiningRm.txt", "normServant.txt", "normLivingRm.txt", "normStairs.txt", "normBed1.txt", "normBath.txt", "normHall.txt", "normStorage.txt", 
+		"normBed2.txt", "normCellar.txt", "normHidEntry.txt", "normHidHall.txt", "normHidOrnateHall.txt", "normLair.txt", "normHidStorage.txt", "normHidBeds.txt", 
+		"altMain.txt", "altBar.txt", "altChurchyard.txt", "altChurch.txt", "altCem1.txt", "altCem2.txt", "altForest1.txt", 
+		"altForest2.txt", "altForest3.txt", "altEntranceway.txt", "altBarn.txt", "altMansion.txt", "altFoyer.txt", "altLibrary.txt", "altKitchen.txt", 
+		"altDiningRm.txt", "altServant.txt", "altLivingRm.txt", "altStairs.txt", "altBed1.txt", "altBath.txt", "altHall.txt", "altStorage.txt", 
+		"altBed2.txt", "altCellar.txt", "altHidEntry.txt", "altHidHall.txt", "altHidOrnateHall.txt", "altLair.txt", "altHidStorage.txt", "altHidBeds.txt"};
 	//create Room objects and store pointers in map
 	for (int x = 0; x < roomNum; x++) {
 		fileLocation = "./" + location + "/" + roomList[x];
 		tempRoom = loadRoom(fileLocation, itemMap, &adj);
-		key = tempRoom->getName();
+		key = tempRoom->getID();
 		roomMap[key] = tempRoom;
 	}
+
+	std::cout << "Rooms created" << std::endl << std::endl;
 
 	//Populate Room neighbor Lists
 	loadList(&adj, &roomMap);
 
+	std::cout << "Lists Loaded" << std::endl << std::endl;
+
 	//create Player object
 	fileLocation = "./" + location + "/player.txt";
 	curPlayer = loadPlayer(fileLocation, &roomMap, itemMap);
+
+	std::cout << "Player Loaded" << std::endl << std::endl;
 
 	//place Room objects in vector
 	std::map<std::string, Room*>::iterator i;
@@ -288,15 +331,13 @@ World* loadWorld(std::string location) {
 	fileLocation = "./" + location + "/world.txt";
 	tempMap = loadFile(fileLocation);
 
-	std::cout << "Map Description: " << tempMap["Description"] << std::endl;
-
 	gameWorld->setName(tempMap["Name"]);
 	gameWorld->setDescription(tempMap["Description"]);
 	gameWorld->setPlayer(curPlayer);
 	gameWorld->setRealWorld(std::stoi(tempMap["realWorld"]));
 	gameWorld->createRooms(rmVect);
 
-	std::cout << gameWorld->getDescription() << std::endl;
+	std::cout << "gameWorld loaded" << std::endl << std::endl;
 
 	return gameWorld;
 }
@@ -312,6 +353,7 @@ World* loadWorld(std::string location) {
 void saveItem(Item *tempItem) {
 	std::map <std::string, std::string> tempMap;
 	std::string saveLocation;
+	tempMap["ID"] = tempItem->getID();
 	tempMap["Name"] = tempItem->getName();
 	tempMap["Description"] = tempItem->getDescription();
 	tempMap["roomDescription"] = tempItem->getRoomDescription();
@@ -320,7 +362,7 @@ void saveItem(Item *tempItem) {
 	tempMap["weapon"] = std::to_string(tempItem->getWeapon());
 	tempMap["roomFeature"] = std::to_string(tempItem->getRoomFeature());
 	tempMap["collectible"] = std::to_string(tempItem->getCollectible());
-	saveLocation = "./save/" + tempItem->getName() + ".txt";
+	saveLocation = "./save/" + tempItem->getID() + ".txt";
 	saveFile(saveLocation, tempMap);
 	return;
 }
@@ -334,7 +376,7 @@ void saveItem(Item *tempItem) {
 **Post-Condition:  new .txt file is created with Room data
 ****************************************************************************/
 void saveRoom(Room *tempRoom) {
-	std::cout << "Creating " << tempRoom->getName() << std::endl;
+	std::cout << "Creating " << tempRoom->getID() << std::endl;
 
 	std::map <std::string, std::string> tempMap;
 	std::string saveLocation;
@@ -343,12 +385,13 @@ void saveRoom(Room *tempRoom) {
 	std::string adjNum;
 	Room *adjRoom;
 	List *neighbors;
+	tempMap["ID"] = tempRoom->getID();
 	tempMap["Name"] = tempRoom->getName();
 	tempMap["longDesc"] = tempRoom->saveLongDesc();
 	tempMap["shortDesc"] = tempRoom->saveShortDesc();
 	tempMap["visited"] = std::to_string(tempRoom->getVisited());
 
-	std::cout << "Name, descriptions, and visited set" << std::endl;
+	std::cout << "ID, Name, descriptions, and visited set" << std::endl;
 
 	itemVect = tempRoom->getItems();//get vector of Items in Room
 	for (int i = 1; i <= itemVect.size(); i++) {//initialized i to 1 and used <= to correctly create itemNum for key
@@ -360,7 +403,7 @@ void saveRoom(Room *tempRoom) {
 			itemNum = "Item" + std::to_string(i);
 		}
 		//std::cout << "itemNum = " << itemNum << std::endl;
-		tempMap[itemNum] = itemVect[i-1]->getName();//set map value to Item name
+		tempMap[itemNum] = itemVect[i-1]->getID();//set map value to Item ID
 	}
 
 	std::cout << "Items set" << std::endl;
@@ -369,9 +412,9 @@ void saveRoom(Room *tempRoom) {
 	neighbors = tempRoom->getNeighbors();
 	for (int i = 0; i < 6; i++) {
 		adjNum = "adj" + std::to_string(i);
-		adjRoom = neighbors->getAdjName(i);
+		adjRoom = neighbors->getAdjName(i);//actually returns a room pointer
 		if (adjRoom != NULL) {
-			tempMap[adjNum] = adjRoom->getName();
+			tempMap[adjNum] = adjRoom->getID();
 		}
 		else {
 			tempMap[adjNum] = "NULL";
@@ -380,7 +423,7 @@ void saveRoom(Room *tempRoom) {
 
 	std::cout << "Adjacent Rooms Set" << std::endl;
 
-	saveLocation = "./save/" + tempRoom->getName() + ".txt";
+	saveLocation = "./save/" + tempRoom->getID() + ".txt";
 	saveFile(saveLocation, tempMap);
 
 	std::cout << "Room saved" << std::endl << std::endl;
@@ -411,9 +454,9 @@ void savePlayer(Player *tempPlayer) {
 		else {
 			itemNum = "Item" + std::to_string(i);
 		}
-		tempMap[itemNum] = itemVect[i-1]->getName();//set map value to Item name
+		tempMap[itemNum] = itemVect[i-1]->getID();//set map value to Item ID
 	}
-	tempMap["currentRoom"] = tempPlayer->getCurrentRoom()->getName();
+	tempMap["currentRoom"] = tempPlayer->getCurrentRoom()->getID();
 	saveFile(saveLocation, tempMap);
 }
 

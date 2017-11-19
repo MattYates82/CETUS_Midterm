@@ -98,7 +98,7 @@ Item* Room::findItem(string current, bool drop){
 			
             std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
 			
-            if (tempString.compare(0, tempString.size() -1, current)){
+            if (!tempString.compare(current)){
                 
                 Item* temp = this->roomItems[i];
                 
@@ -157,4 +157,12 @@ Creature* Room::getEnemy(){
     } else {
         return NULL;
     }
+}
+
+void Room::setID(string currentName) {
+	this->ID = currentName;
+}
+
+string Room::getID(){
+	return this->ID;
 }
