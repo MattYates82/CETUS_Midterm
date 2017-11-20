@@ -510,3 +510,12 @@ using std::string;
 	std::vector<Room*> World::getRooms() {
 		return this->worldRooms;
 	}
+
+	int	World::createItems(std::vector <Item*> itemVect) {
+		this->worldItems = itemVect;
+        return 0;
+	}
+
+	std::vector<Item*> World::getItems() {
+		return this->worldItems;
+	}
