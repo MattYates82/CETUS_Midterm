@@ -258,7 +258,9 @@ World* loadWorld(std::string location) {
 	std::map<std::string, std::vector<std::string>> adj;//map of vectors to contain room neighbors prior to assigning Lists in Rooms
 	std::string key;//used to set key values for maps
 	std::vector<Room*> rmVect;
+	std::vector<Item*> itemVect;
 	World *gameWorld = new World;
+	std::map <std::string, std::string>::iterator it;
 
 	//create array holding list of all Item files
 	//Update this list
@@ -336,6 +338,18 @@ World* loadWorld(std::string location) {
 	gameWorld->setPlayer(curPlayer);
 	gameWorld->setRealWorld(std::stoi(tempMap["realWorld"]));
 	gameWorld->createRooms(rmVect);
+
+	//Populate world with listed items
+	if (tempMap.count("Item01")) {
+		it = tempMap.find("Item01");
+		while (it->first.compare(0, 4, "Item") == 0) {
+			std::string itemID = it->second;
+			itemVect.push_back(itemMap[itemID]);
+			it++;
+			std::cout << itemMap[itemID]->getID() << " added to world" << std::endl << std::endl;
+		}
+	}
+	gameWorld->createItems(itemVect);
 
 	std::cout << "gameWorld loaded" << std::endl << std::endl;
 
@@ -471,6 +485,25 @@ void saveWorld(World *gameState) {
 	std::map <std::string, std::string> tempMap;
 	std::string saveLocation = "./save/world.txt";
 	std::vector<Room*> rmVect;
+	std::vector<Item*> itemVect;
+	std::string itemNum;
+
+	std::cout << "Now saving game" << std::endl << std::endl;
+
+	//Save items stored in world object
+	itemVect = gameState->getItems();
+	for (int i = 1; i <= itemVect.size(); i++) {
+		saveItem(itemVect[i-1]);
+		if (i < 10) {//create key for map
+			itemNum = "Item0" + std::to_string(i);
+		}
+		else {
+			itemNum = "Item" + std::to_string(i);
+		}
+		tempMap[itemNum] = itemVect[i-1]->getID();//set map value to Item ID
+	}
+
+	std::cout << "Items Saved" << std::endl << std::endl;
 
 	//Place data in map for World attributes and save to file
 	tempMap["Name"]=gameState->getName();
