@@ -10,7 +10,7 @@ Room::Room(){
 
 	this->visited = false;
 	this->neighbors = NULL;
-    this->enemy = NULL;
+	this->enemy = NULL;
 	return;
 	
 }
@@ -30,7 +30,7 @@ void Room::addDescriptions(string longDesc, string shortDesc){
 void Room::addItem(Item* current){
 	
 	this->roomItems.push_back(current);
-	cout << "\nYou drop the " << current->getName() << ".\n";
+	
 	return;
 	
 }
@@ -90,10 +90,14 @@ void Room::setVisited(bool visit){
 Item* Room::findItem(string current, bool drop){
     std::string tempString;
     std::transform(current.begin(), current.end(), current.begin(), ::tolower);
+	
     for (int i = 0; i < this->roomItems.size(); i++){
-        if(roomItems[i] != nullptr){
+		
+		if(roomItems[i] != NULL){
             tempString = this->roomItems[i]->getName();
+			
             std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
+			
             if (!tempString.compare(current)){
                 
                 Item* temp = this->roomItems[i];
@@ -136,7 +140,7 @@ int Room::invIsEmpty(){
 }
 
 int Room::hasEnemy(){
-    if(this->enemy != NULL ){
+    if(this->enemy != NULL){
         return 1;
     }else {
         return 0;
@@ -153,4 +157,12 @@ Creature* Room::getEnemy(){
     } else {
         return NULL;
     }
+}
+
+void Room::setID(string currentName) {
+	this->ID = currentName;
+}
+
+string Room::getID(){
+	return this->ID;
 }

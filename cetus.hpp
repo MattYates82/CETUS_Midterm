@@ -19,6 +19,7 @@ public:
     string getName();
     void getDesc();
     void getRoomDesc();
+
 };
 
 #endif 

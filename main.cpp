@@ -5,12 +5,18 @@
 **Description:  Used to test function of data.cpp and data.hpp
 ****************************************************************************/
 #include "CETUS_data.hpp"
+const std::string red("\033[0;31m");
+const std::string green("\033[1;32m");
+const std::string yellow("\033[1;33m");
+const std::string cyan("\033[0;36m");
+const std::string magenta("\033[0;35m");
+const std::string reset("\033[0m");
 
 int parser(World*);
 
 int main() {
-	/*//test create and populate map from loadFile function
-	std::map <std::string, std::string> testMap;
+	//test create and populate map from loadFile function
+	/*std::map <std::string, std::string> testMap;
 	testMap = loadFile("./source/room_test.txt");
 
 	//Output map elements to confirm
@@ -27,10 +33,10 @@ int main() {
 	saveFile("./save/test_output.txt", testMap);
 
 
-	std::cout << "Files compiled and ran correctly" << std::endl;*/
+	std::cout << "Files compiled and ran correctly" << std::endl;
 
 	//test Item creation
-	/*std::cout << "Testing Item Creation" << std::endl;
+	std::cout << "Testing Item Creation" << std::endl;
 	std::string location = "./source/item_test.txt";
 	Item* testItem = loadItem(location);
 	std::map<std::string, Item*> itemMap;
@@ -41,10 +47,10 @@ int main() {
 	std::cout << "Healing = " << itemMap["test"]->getHealing() << std::endl;
 	std::cout << "weapon = " << itemMap["test"]->getWeapon() << std::endl;
 	std::cout << "roomFeature = " << itemMap["test"]->getRoomFeature() << std::endl;
-	std::cout << "collectible = " << itemMap["test"]->getCollectible() << std::endl;*/
+	std::cout << "collectible = " << itemMap["test"]->getCollectible() << std::endl;
 
 	//Create Item, Room, and Player objects
-	/*std::string location = "source";
+	std::string location = "source";
 	const int itemNum = 9;//set number of item files for array access
     const int roomNum = 5;//set number of room files for array access
 	Item* tempItem;//will be used to temporarily store created items
@@ -159,14 +165,21 @@ int main() {
 		std::cout << "Item " << y << " collectible Bool = " << playerItems[y]->getCollectible() << std::endl;
 	}*/
 
+	std::cout << "the program has started yo" << std::endl;
+
 	World* gameWorld;
     gameWorld = loadWorld("source");
+	gameWorld->ClearScreen();
+	string intro = "Welcome to the CETUS CMD1 Midpoint demonstration! Today, you will be able to see our data parser, command parser and data structures in action; however, full functionality won't be available at this time. Some features that will be coming soon include: \n-Save option\n-Scary creatures and other unknown entities\n-Combat system\n-World flipping alternate dimensions\n-Additional items and rooms\n-Plot enhancements & more!\n";
+    string* temp = &intro;
 
+    gameWorld->printLogo();
+    gameWorld->cetusPrint(temp, 3);
 	std::cout << gameWorld->getName() << std::endl;
 	std::cout << gameWorld->getDescription() << std::endl;
 	std::cout << gameWorld->getRealWorld() << std::endl << std::endl;
 
-	saveWorld(gameWorld);
+	//saveWorld(gameWorld);
 
     parser(gameWorld);
 

@@ -1,3 +1,4 @@
+ID=Lead Pipe
 Name=Lead Pipe
 roomDescription=A lead pipe is laying on the ground.
 Description=A short length of rusty lead pipe.  It has some decent weight to it.

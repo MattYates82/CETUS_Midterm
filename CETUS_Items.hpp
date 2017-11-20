@@ -10,6 +10,7 @@ class Item {
 	
 	private:
 	
+		string ID;
 		string	Name;
 		string	Description;
 		string 	roomDescription;
@@ -22,9 +23,10 @@ class Item {
 	public:
 	
 		Item();
-		Item(string Name, string Description, string roomDesc, int Power, int Healing, bool weapon, bool feature, bool collect);
+		Item(string ID, string Name, string Description, string roomDesc, int Power, int Healing, bool weapon, bool feature, bool collect);
 		~Item();
 		void damageItem(int damage);
+		string getID();
 		string getName();
 		string getDescription();
 		string getRoomDescription();

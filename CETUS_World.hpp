@@ -46,7 +46,7 @@ class World {
 		void printInventory();
 		void printRoomInventory();
 		void printAdjacent(int direction);
-		void move(int direction);
+		int move(int direction);
 		void printLogo();
 		void ClearScreen();
 		void cetusPrint(string* inText, int color);

@@ -19,6 +19,7 @@ class Room {
 	
 		friend class Player;
 		friend class World;
+		string ID;
 		string 	Name;
 		string	longDesc;
 		string	shortDesc;
@@ -50,5 +51,7 @@ class Room {
         int hasEnemy();
         void setEnemy(Creature*);
         Creature* getEnemy();
+		void setID(string currentID);
+		string getID();
 };
 #endif

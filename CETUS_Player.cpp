@@ -158,7 +158,6 @@ std::vector<Item*> Player::getItems(){
 void Player::addItem(Item* current){
     
     this->inventory.push_back(current);
-    cout << "\nYou pick up the " << current->getName() << ".\n";
     return;
     
 }

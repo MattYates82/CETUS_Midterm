@@ -1,6 +1,5 @@
 Name=Player
 health=100
 movesCompleted=0
-currentRoom=Main Street
-Item01=Key
+currentRoom=normMain
 specialItemCount=0

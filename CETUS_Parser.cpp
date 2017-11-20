@@ -117,6 +117,9 @@ void mapMaker(std::map<std::string, int> *map){
     map->insert (std::pair<std::string, int>("look_at", 14));
     map->insert (std::pair<std::string, int>("inspect", 14));
     map->insert (std::pair<std::string, int>("drop", 15));
+    map->insert (std::pair<std::string, int>("apply", 16));
+    map->insert (std::pair<std::string, int>("heal", 16));
+    map->insert (std::pair<std::string, int>("use", 20));
     return;
 }
 
@@ -215,6 +218,60 @@ void checkRoomInv(World* world, bool *foundNoun1, bool* foundNoun2, bool* found,
     temp = NULL;
 }
 
+string nameDirectionChecker(Player* player, string name, bool* found, bool* foundVerb){
+    string verb, temp;
+    int answer=-5;
+    for(int i=0; i<6; i++){
+        if(player->getCurrentRoom()->getNeighbors()->getAdjName(i) != NULL){
+            temp = player->getCurrentRoom()->getNeighbors()->getAdjName(i)->getName();
+            std::transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
+            if(temp == name){
+                answer = i;
+                *found = true;
+                *foundVerb = true;
+            }
+        }
+    }
+    switch (answer){
+        case 0:
+            verb = "north";
+            break;
+        case 1:
+            verb = "south";
+            break;
+        case 2:
+            verb = "east";
+            break;
+        case 3:
+            verb = "west";
+            break;
+        case 4:
+            verb = "up";
+            break;
+        case 5:
+            verb = "down";
+            break;
+        default:
+            verb = "";
+            
+    }
+    
+    return verb;
+}
+
+string useSpecifier(bool *foundNoun1, bool *foundNoun2, bool *found, bool *foundRoom, bool *foundInv, bool *foundEnemy, Item* noun1, Item* noun2, string combo, Creature* baddie){
+    std::string verb;
+    if(foundNoun1 && noun1->getWeapon()){
+        verb = "attack";
+    } else if(foundNoun1 && noun1->getWeapon()){
+        verb = "attack";
+    } else if(noun1->getName() == "Bandaid" || noun1->getName()== "Salve"){
+        verb = "apply";
+    }
+    
+    return verb;
+}
+
 
 int parser(World* world){
     
@@ -249,6 +306,7 @@ int parser(World* world){
         bool foundInv = false;
         bool foundRoom = false;
         bool found=false;
+        bool selfFlag = false;
         
         printf("\nWhat are you going to do?\n");
         
@@ -271,8 +329,13 @@ int parser(World* world){
         while(sstream >> first){
             found = false;
             
-            //check for special case "with"
-            if(first == "with"){
+            //special case "self"
+            if(first == "self"){
+                    selfFlag = true;
+                    found = true;
+            }
+            //check for special case "with" or "on"
+            if(first == "with" || first=="on"){
                 withFlag = true;
                 found = true;
             }
@@ -294,6 +357,10 @@ int parser(World* world){
             if(!foundVerb && !found){
                 verbFinder(mymap, &verb, &foundVerb, &found, first);
             }
+            if(!foundVerb && !found){
+               verb = nameDirectionChecker(player, first, &found, &foundVerb);
+            }
+            
             
             //search for enemy
             if(!found && (verb == "look_at" || verb=="attack") && !foundEnemy && player->getCurrentRoom()->hasEnemy()){
@@ -320,7 +387,9 @@ int parser(World* world){
                     verbFinder(mymap, &verb, &foundVerb, &found, combo);
                     
                 }
-                
+                if(!foundVerb && !found){
+                    verb = nameDirectionChecker(player, combo, &found, &foundVerb);
+                }
                 
                 //search for enemy
                 if(!found && (verb == "look_at" || verb=="attack") && !foundEnemy && player->getCurrentRoom()->hasEnemy()){
@@ -351,6 +420,10 @@ int parser(World* world){
             
         }
         
+        if(verb=="use"){
+            verb = useSpecifier(&foundNoun1, &foundNoun2, &found, &foundRoom, &foundInv, &foundEnemy, noun1, noun2, combo, baddie);
+        }
+        
         if(mymap.count(verb) > 0){
             
             choice = mymap.find(verb)->second;
@@ -363,50 +436,58 @@ int parser(World* world){
             case 1:  //Attack, Hit
                 if(foundNoun1 && withFlag && foundEnemy && noun1->getWeapon()){
                     battle(player, baddie, noun1->getPower());
-                }else if(foundNoun1 && withFlag && foundEnemy && !noun1->getWeapon()){
+                }else if(withFlag && foundEnemy && !noun1->getWeapon()){
                     cout << "You didn't pick a valid weapon.\n";
                 } else if (foundEnemy){
                     battle(player, baddie, 0);
+                }else if(!foundEnemy && selfFlag){
+                    cout <<"\nWhy would you attack yourself?\n";
                 } else {
                     cout << "What do you want to attack?\n";
                     
                 }
                 break;
             case 2: //North, n
-                world->move(0);
-                randomEnemyGenerator(world->getCurrentRoom());
-                displayRoom(world, 0);
+                if(world->move(0)){
+                    randomEnemyGenerator(world->getCurrentRoom());
+                    displayRoom(world, 0);
+                }
                 break;
             case 3:  //South, s
-                world->move(1);
-                randomEnemyGenerator(world->getCurrentRoom());
-                displayRoom(world, 0);
+                if(world->move(1)){
+                    randomEnemyGenerator(world->getCurrentRoom());
+                    displayRoom(world, 0);
+                }
                 break;
                 
             case 4:  //East, e
-                world->move(2);
-                randomEnemyGenerator(world->getCurrentRoom());
-                displayRoom(world, 0);
+                if(world->move(2)){
+                    randomEnemyGenerator(world->getCurrentRoom());
+                    displayRoom(world, 0);
+                }
                 break;
             case 5:  //West, w
-                world->move(3);
-                randomEnemyGenerator(world->getCurrentRoom());
-                displayRoom(world, 0);
+                if(world->move(3)){
+                    randomEnemyGenerator(world->getCurrentRoom());
+                    displayRoom(world, 0);
+                }
                 break;
             case 6:  //Up, u
-                world->move(4);
-                randomEnemyGenerator(world->getCurrentRoom());
-                displayRoom(world, 0);
+                if(world->move(4)){
+                    randomEnemyGenerator(world->getCurrentRoom());
+                    displayRoom(world, 0);
+                }
                 break;
             case 7:  //Down, d
-                world->move(5);
-                randomEnemyGenerator(world->getCurrentRoom());
-                displayRoom(world, 0);
+                if(world->move(5)){
+                    randomEnemyGenerator(world->getCurrentRoom());
+                    displayRoom(world, 0);
+                }
                 break;
-            case 8:  //Grab, Take
+            case 8:  //Grab, Take, Pick up
                 if(foundRoom && foundNoun1 && noun1->getCollectible()){
                     player->addItem(player->getCurrentRoom()->removeItem(noun1));
-                    
+                    cout << "\nYou pick up a " << noun1->getName() << "\n";
                 }else if(foundRoom && foundNoun1 && !noun1->getCollectible()){
                     cout << "You cannot take that.\n";
                 }else {
@@ -451,6 +532,17 @@ int parser(World* world){
                     cout << "I don't see that in your inventory.\n";
                 }
                 break;
+            case 16: //heal, apply
+                if(foundInv && foundNoun1 && (noun1->getHealing() > 0)){
+                    player->healPlayer(noun1->getHealing());
+                    cout << "\nYou apply the " << noun1->getName() << " and are healed for " << noun1->getHealing() << " points.\n";
+                } else if(foundNoun1 && !foundInv){
+                    cout << "\n" << noun1->getName() << " is not in your inventory.\n";
+                } else if(foundNoun1 && noun1->getHealing() <= 0){
+                    cout << "\nThat will not aid in your healing!\n";
+                } else {
+                    cout << "\nI don't know what you are asking.\n";
+                }
             default:
                 std::cout << "I don't know what you are asking for.\n";
         }

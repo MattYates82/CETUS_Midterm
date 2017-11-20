@@ -78,7 +78,7 @@ void Cultist::getRoomDesc(){
     if(this->isDead(0)){
         cout << "A dark blue cloak lies at your feet - empty."<< endl;
     } else{
-        cout << "A robed figure glares in your direction!" << endl;
+        cout << "A cultist glares in your direction!" << endl;
     }
     return;
 }
