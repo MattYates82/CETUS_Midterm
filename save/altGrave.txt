@@ -1,0 +1,9 @@
+Description=The ground in front of the gravestone is flat.
+Healing=0
+ID=altGrave
+Name=Grave
+Power=0
+collectible=0
+roomDescription=The grave marked by the stone is undisturbed.
+roomFeature=1
+weapon=0

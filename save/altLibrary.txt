@@ -1,0 +1,13 @@
+ID=altLibrary
+Item01=altBookshelves
+Item02=altDesk
+Name=Library
+adj0=NULL
+adj1=NULL
+adj2=altFoyer
+adj3=NULL
+adj4=NULL
+adj5=NULL
+longDesc=This is clearly the mansion library.
+shortDesc=The mansion library
+visited=0

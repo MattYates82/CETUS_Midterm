@@ -1,0 +1,9 @@
+Description=Someone dug up the old coffin and smashed the lid.  You can see the old bones lying in their box.
+Healing=0
+ID=normGrave
+Name=Grave
+Power=0
+collectible=0
+roomDescription=The grave marked by the stone looks like it has been dug up.
+roomFeature=1
+weapon=0

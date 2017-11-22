@@ -1,0 +1,9 @@
+Description=The wall is broken at one point as if something from the forest plowed right through it.  Some stone rubble has fallen scattered at the end of the cemetery.
+Healing=0
+ID=normStonewall
+Name=Stonewall
+Power=0
+collectible=0
+roomDescription=A low wall of stone separates the cemetery from the forest beyond.
+roomFeature=1
+weapon=0

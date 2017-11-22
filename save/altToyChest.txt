@@ -1,0 +1,9 @@
+Description=The animals painted on the outside of this chest are snarling with bloody teeth.  You decide you don't want to know what's inside it.
+Healing=0
+ID=altToyChest
+Name=Toy Chest
+Power=0
+collectible=0
+roomDescription=There is a small chest sitting against the wall between the beds.
+roomFeature=1
+weapon=0

@@ -1,0 +1,9 @@
+Description=As you look closer at the gate, you'd swear you begin to see pictures in the way the iron twists and turns in on itself.
+Healing=0
+ID=altMansGate
+Name=Mansion Gate
+Power=0
+collectible=0
+roomDescription=The wrought iron gate at the front of the driveway stands open.
+roomFeature=1
+weapon=0

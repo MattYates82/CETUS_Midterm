@@ -1,0 +1,9 @@
+Description=It is an old scorch mark.  It looks like something was burned on the wall.
+Healing=0
+ID=normScorchMarks2
+Name=Scorch Marks
+Power=0
+collectible=0
+roomDescription=You seem some black residue in one section of the wall.  It almost looks like scorch marks.
+roomFeature=1
+weapon=0

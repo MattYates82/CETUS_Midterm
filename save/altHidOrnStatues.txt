@@ -1,0 +1,9 @@
+Description=The statues a great, serpent-like monster rising out of waves at the base.
+Healing=0
+ID=altHidOrnStatues
+Name=Statues
+Power=0
+collectible=0
+roomDescription=Two statues flank the door to the south
+roomFeature=1
+weapon=0

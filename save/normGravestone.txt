@@ -1,0 +1,9 @@
+Description=The gravestone reads "Elihu Schuylkill.  1666 - 1724.  Founder, Father, Patron".  Clearly, Elihu was one of the founding fathers of Schuykill.
+Healing=0
+ID=normGravestone
+Name=Gravestone
+Power=0
+collectible=0
+roomDescription=One gravestone in particular draws your eye.  It's larger and more ornate than all the others.
+roomFeature=1
+weapon=0

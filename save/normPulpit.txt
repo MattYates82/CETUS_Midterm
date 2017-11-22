@@ -1,0 +1,9 @@
+Description=The pulpit has the shape of a ship's bow.
+Healing=0
+ID=normPulpit
+Name=Pulpit
+Power=0
+collectible=0
+roomDescription=The pulpit stands at the front of the church, somehow untouched by the chaos and wreckage around it.
+roomFeature=1
+weapon=0

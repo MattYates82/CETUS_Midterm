@@ -1,0 +1,9 @@
+Description=Pens, pencils, stationary.  There's nothing useful here.
+Healing=0
+ID=normDesk
+Name=Desk
+Power=0
+collectible=0
+roomDescription=A small desk is tucked into the far corner of the room
+roomFeature=1
+weapon=0

@@ -1,0 +1,9 @@
+Description=You can't read the writing on this stone.  The text is in a strange language that seems to writhe as you try to read it.
+Healing=0
+ID=altGravestone
+Name=Gravestone
+Power=0
+collectible=0
+roomDescription=One gravestone in particular draws your eye.  It's larger and more ornate than all the others.
+roomFeature=1
+weapon=0

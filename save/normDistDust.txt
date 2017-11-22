@@ -1,0 +1,9 @@
+Description=The dust is swept out from the wall in an arc, as if someone had opened a section of the wall.
+Healing=0
+ID=normDistDust
+Name=Disturbed Dust
+Power=0
+collectible=0
+roomDescription=It looks like there some disturbed dust on the floor by the west wall.
+roomFeature=1
+weapon=0

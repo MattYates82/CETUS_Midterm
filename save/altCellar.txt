@@ -1,0 +1,13 @@
+ID=altCellar
+Item01=altCobwebs
+Item02=altWineRack
+Name=Cellar
+adj0=NULL
+adj1=NULL
+adj2=
+adj3=NULL
+adj4=altKitchen
+adj5=NULL
+longDesc=The mansion cellar is dark with an earthen floor and a musty smell.
+shortDesc=The mansion cellar
+visited=0

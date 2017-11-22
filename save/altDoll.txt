@@ -1,0 +1,9 @@
+Description=You reach out to touch the doll, and the entire world seems to move sideways.  There is an explosion of unreal colors.
+Healing=0
+ID=altDoll
+Name=Doll
+Power=0
+collectible=0
+roomDescription=Amy's doll is still sitting on the bed.  A strange glow seems to emanate from it.
+roomFeature=1
+weapon=0

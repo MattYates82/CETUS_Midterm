@@ -1,0 +1,9 @@
+Description=The beds here are smaller and shorter than the others in the house.
+Healing=0
+ID=normKidsBed
+Name=Kids Bed
+Power=0
+collectible=0
+roomDescription=There are two beds in this room.
+roomFeature=1
+weapon=0

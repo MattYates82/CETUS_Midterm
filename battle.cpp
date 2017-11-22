@@ -36,27 +36,29 @@ void battle(Player *p1, Creature* c2, int modifier){
 }
 
 
-void randomEnemyGenerator(Room* room){
+void randomEnemyGenerator(Room* room, int act){
     srand(time(0));
     Creature* newCreat = NULL;
-    if(room->getName() == "Forest3" && room->hasEnemy() == 0){
-        newCreat = new Cetus();
-        room->setEnemy(newCreat);
-    } else if(room->hasEnemy()==0 && room->getName()!="forest3" && room->getName() != "lair"){
-        
-        int choice = rand()%10 + 1;
-        if(choice < 6){
-            room->setEnemy(NULL);
-        } else if(choice == 6){
-            newCreat= new Ghost();
-        } else if(choice == 7){
-            newCreat = new Cultist();
-        } else if(choice == 8){
-            newCreat = new Merman();
-        } else {
-            return;
+    if(act > 1){
+        if(room->getName() == "Forest3" && room->hasEnemy() == 0 && act==3){
+            newCreat = new Cetus();
+            room->setEnemy(newCreat);
+        } else if(room->hasEnemy()==0 && room->getName()!="forest3" && room->getName() != "lair"){
+            
+            int choice = rand()%10 + 1;
+            if(choice < 6){
+                room->setEnemy(NULL);
+            } else if(choice == 6){
+                newCreat= new Ghost();
+            } else if(choice == 7){
+                newCreat = new Cultist();
+            } else if(choice == 8){
+                newCreat = new Merman();
+            } else {
+                return;
+            }
+            room->setEnemy(newCreat);
         }
-        room->setEnemy(newCreat);
     }
     return;
 }

@@ -1,5 +1,6 @@
 Description=A short length of rusty lead pipe.  It has some decent weight to it.
 Healing=0
+ID=Lead Pipe
 Name=Lead Pipe
 Power=4
 collectible=1

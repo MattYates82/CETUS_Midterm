@@ -1,0 +1,9 @@
+Description=The steps creak and groan as you put your weight on them.
+Healing=0
+ID=altPorchSteps
+Name=Steps
+Power=0
+collectible=0
+roomDescription=A small flight of steps lead up to the porch.
+roomFeature=1
+weapon=0

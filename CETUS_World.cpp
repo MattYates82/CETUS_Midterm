@@ -36,6 +36,7 @@ using std::string;
 		this->Description = ' ';
 		this->currentPlayer = NULL;
 		this->realWorld = true;
+        this->act = 1;
 		//this->currentPlayer->setCurrentRoom(NULL);
 		//this->currentPlayer->setNeighbors(NULL);		
 		
@@ -46,6 +47,7 @@ using std::string;
 		Player temp = Player(current, currentHealth, currentMoves, currentSpecialCount);
 		this->currentPlayer = &temp;
 		this->realWorld = true;
+        this->act=1;
 
 	}
 		
@@ -516,3 +518,61 @@ using std::string;
 	std::vector<Room*> World::getRooms() {
 		return this->worldRooms;
 	}
+
+int World::getAct(){
+    return this->act;
+}
+
+void World::incrementAct(){
+    this->act++;
+}
+
+int World::actController(string item){
+    
+    std::string ritualInterrupt = "Shrouded figures surround the altar.  There is a gutteral chanting from all. Taking a few steps further, you see a sphere of mystical energy surrounding the altar.  Walking forward in astonishment, you catch the attention of one of the figures.  When his focus breaks, the sphere shatters into jagged pieces of energy, and creates a vacuum.  Chanting turns to screams and groans as the robed figures start getting sucked in.  Others try to hold on.  You aren't so lucky.  One of the robed figures uses you to work his way toward the door.  You are flung toward the energy vortex, and everything goes dark.";
+    std::string touchAltar = "You touched the altar. Your body fragments as you pass through the dimensional rift.\n";
+    std::string touchBear = "You touched the bear. Your body fragments as you pass through the dimensional rift.\n";
+    Room* target = NULL;
+    int moveAct=0;
+    //end of first act
+    if(this->getPlayer()->getCurrentRoom()->getID() == "normLair" && this->getAct() == 1 && item == "Altar"){
+        cout << std::endl << ritualInterrupt << endl;
+        this->incrementAct();
+        //removeItem(ritual);
+        for(int i=0; i< worldRooms.size(); i++){
+            if(this->worldRooms[i]->getID() == "altLair"){
+                target = this->worldRooms[i];
+                moveAct=1;
+            }
+        }
+       
+    }
+    //going back into bad dimension
+    if(!moveAct && this->getPlayer()->getCurrentRoom()->getID() == "normLair" && this->getAct() == 2 && item == "Altar"){
+        cout << std::endl << touchAltar << endl;
+        for(int i=0; i< worldRooms.size(); i++){
+            if(this->worldRooms[i]->getID() == "altLair"){
+                target = this->worldRooms[i];
+                moveAct=1;
+            }
+        }
+       
+    }
+
+    
+    //inspecting bear
+    if(!moveAct && this->getPlayer()->getCurrentRoom()->getID() == "altBed1" && this->getAct() == 2 && item == "Doll"){
+        cout << std::endl << touchBear << endl;
+        for(int i=0; i< worldRooms.size(); i++){
+            if(this->worldRooms[i]->getID() == "normBed1"){
+                target = this->worldRooms[i];
+                moveAct=1;
+            }
+        }
+      
+    }
+    if(moveAct){
+        this->setCurrentRoom(target);
+    }
+    return moveAct;
+}

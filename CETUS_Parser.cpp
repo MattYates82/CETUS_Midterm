@@ -449,38 +449,38 @@ int parser(World* world){
                 break;
             case 2: //North, n
                 if(world->move(0)){
-                    randomEnemyGenerator(world->getCurrentRoom());
+                    randomEnemyGenerator(world->getCurrentRoom(), world->getAct());
                     displayRoom(world, 0);
                 }
                 break;
             case 3:  //South, s
                 if(world->move(1)){
-                    randomEnemyGenerator(world->getCurrentRoom());
+                    randomEnemyGenerator(world->getCurrentRoom(), world->getAct());
                     displayRoom(world, 0);
                 }
                 break;
                 
             case 4:  //East, e
                 if(world->move(2)){
-                    randomEnemyGenerator(world->getCurrentRoom());
+                    randomEnemyGenerator(world->getCurrentRoom(), world->getAct());
                     displayRoom(world, 0);
                 }
                 break;
             case 5:  //West, w
                 if(world->move(3)){
-                    randomEnemyGenerator(world->getCurrentRoom());
+                    randomEnemyGenerator(world->getCurrentRoom(), world->getAct());
                     displayRoom(world, 0);
                 }
                 break;
             case 6:  //Up, u
                 if(world->move(4)){
-                    randomEnemyGenerator(world->getCurrentRoom());
+                    randomEnemyGenerator(world->getCurrentRoom(), world->getAct());
                     displayRoom(world, 0);
                 }
                 break;
             case 7:  //Down, d
                 if(world->move(5)){
-                    randomEnemyGenerator(world->getCurrentRoom());
+                    randomEnemyGenerator(world->getCurrentRoom(), world->getAct());
                     displayRoom(world, 0);
                 }
                 break;
@@ -518,7 +518,9 @@ int parser(World* world){
                 break;
             case 14:  //Look At
                 if(foundNoun1){
-                    cout << noun1->getDescription() << "\n";
+                    if(!(world->actController(noun1->getName()))){
+                        cout << noun1->getDescription() << "\n";
+                    }
                 }else if(foundEnemy){
                     baddie->getDesc();
                 } else {

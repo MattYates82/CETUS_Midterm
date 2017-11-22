@@ -1,0 +1,9 @@
+Description=This painting is a seascape depicting a storm tossed ocean.
+Healing=0
+ID=normPainting2
+Name=Painting
+Power=0
+collectible=0
+roomDescription=A painting hangs on the east wall.
+roomFeature=1
+weapon=0

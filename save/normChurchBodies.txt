@@ -1,0 +1,9 @@
+Description=It looks like these people tried to hide in the church, for all the good that did them.
+Healing=0
+ID=normChurchBodies
+Name=Bodies
+Power=0
+collectible=0
+roomDescription=A few bodies are strewn among the pews.
+roomFeature=1
+weapon=0

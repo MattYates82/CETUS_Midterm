@@ -15,6 +15,6 @@
 #include "CETUS_World.hpp"
 
 void battle(Player *p1, Creature* c2, int modifier);
-void randomEnemyGenerator(Room*);
+void randomEnemyGenerator(Room*, int);
 void gameEnd();
 #endif

@@ -1,0 +1,9 @@
+Description= Travel pack which contains one last bandaid, still sealed and sterile.
+Healing=10
+ID=Bandaid
+Name=Bandaid
+Power=0
+collectible=1
+roomDescription= A portable Band Aid brand container sits nearby containing one last bandage.
+roomFeature=0
+weapon=0

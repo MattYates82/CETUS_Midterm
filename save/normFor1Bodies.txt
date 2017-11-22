@@ -1,0 +1,9 @@
+Description=The bodies are badly mutilated and look as if they were dragged here.
+Healing=0
+ID=normFor1Bodies
+Name=Bodies
+Power=0
+collectible=0
+roomDescription=You see a few bodies lying on the path in front of you.
+roomFeature=1
+weapon=0

@@ -1,0 +1,9 @@
+Description=You see that many of the windows were broken as people tried to flee in panic.  Bodies are lying scattered about where people were killed as they ran.
+Healing=0
+ID=normBusinesses
+Name=Businesses
+Power=0
+collectible=0
+roomDescription=Businesses line each side of the street.
+roomFeature=1
+weapon=0

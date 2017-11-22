@@ -1,0 +1,9 @@
+Description=Look at all this junk food!
+Healing=0
+ID=normFridge
+Name=Refridgerator
+Power=0
+collectible=0
+roomDescription=A refridgerator sits against one of the walls.
+roomFeature=1
+weapon=0

@@ -1,0 +1,9 @@
+Description=A few little things that Amy was working on are still on the work bench.
+Healing=0
+ID=normBench
+Name=Work Bench
+Power=0
+collectible=0
+roomDescription=A work bench sits under the peg board.
+roomFeature=1
+weapon=0

@@ -1,0 +1,9 @@
+Description=The statues depicts a bearded figure with a trident.
+Healing=0
+ID=altIdol
+Name=Idol
+Power=0
+collectible=0
+roomDescription=A large idol sits just beyond the altar
+roomFeature=1
+weapon=0

@@ -18,7 +18,8 @@ class World {
 		Player*	currentPlayer;
 		bool	realWorld;
 		std::vector<Room*> worldRooms; 
-	
+        int act;
+    
 	public:
 	
 		World();
@@ -51,6 +52,8 @@ class World {
 		void ClearScreen();
 		void cetusPrint(string* inText, int color);
 		std::vector<Room*> getRooms();
-	
+        int getAct();
+        void incrementAct();
+        int actController(string);
 };
 #endif
