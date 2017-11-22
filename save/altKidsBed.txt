@@ -1,0 +1,9 @@
+Description=The beds are covered with bloody sheets, and you can see two small unmoving lumps underneath the sheets.
+Healing=0
+ID=altKidsBed
+Name=Kids Bed
+Power=0
+collectible=0
+roomDescription=There are two beds in this room.
+roomFeature=1
+weapon=0

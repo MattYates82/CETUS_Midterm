@@ -1,0 +1,9 @@
+Description=As you approach, you see that the door has been forced open.  The mutilated corpse inside tells you that one of the townspeople thought he could hide here.  He was wrong.
+Healing=0
+ID=normMausoleum
+Name=Mausoleum
+Power=0
+collectible=0
+roomDescription=A small mausoleum sits near the end of the cemetery.
+roomFeature=1
+weapon=0

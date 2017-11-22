@@ -1,0 +1,9 @@
+Description=The work bench is covered in severed heads and limbs held by clamps.
+Healing=0
+ID=altBench
+Name=Work Bench
+Power=0
+collectible=0
+roomDescription=A work bench sits under the peg board.  
+roomFeature=1
+weapon=0

@@ -1,0 +1,9 @@
+Description=The moon hangs over the sea as the waves crash against rocks at the bottom of the cliff.  It would be peaceful if it weren't for the horrors you've already seen.
+Healing=0
+ID=normOcean
+Name=Ocean
+Power=0
+collectible=0
+roomDescription=You can see the ocean past the drop off.
+roomFeature=1
+weapon=0

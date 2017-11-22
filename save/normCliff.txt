@@ -1,0 +1,9 @@
+Description=The cliff drops precipitously to the sea.  You can see waves crashing against the rocks at the bottom.
+Healing=0
+ID=normCliff
+Name=Cliff
+Power=0
+collectible=0
+roomDescription=The forest ends abruptly in the sudden drop of a cliff.
+roomFeature=1
+weapon=0

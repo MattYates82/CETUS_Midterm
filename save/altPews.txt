@@ -1,0 +1,9 @@
+Description=Something seems strange about these pews.  They don't look like they're made from any wood you've ever seen.  The don't even look like they're meant to be sat on by humans, or anything else that walks on legs.
+Healing=0
+ID=altPews
+Name=Pews
+Power=0
+collectible=0
+roomDescription=The pews in this church are whole and undisturbed.
+roomFeature=1
+weapon=0

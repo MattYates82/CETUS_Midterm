@@ -1,0 +1,9 @@
+Description=The chests are closed with a heavy iron lock.  It doesn't look like you'll be able to break them open.
+Healing=0
+ID=altCultChests
+Name=Chests
+Power=0
+collectible=0
+roomDescription=A chest sits at the foot of each bed.
+roomFeature=1
+weapon=0

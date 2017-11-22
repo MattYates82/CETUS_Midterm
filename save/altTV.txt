@@ -1,0 +1,9 @@
+Description=The TV is on, but there is only static on the screen.  Great.  The last thing you want to deal with now is "the TV people".
+Healing=0
+ID=altTV
+Name=TV
+Power=0
+collectible=0
+roomDescription=There is a TV in one corner of the room.
+roomFeature=1
+weapon=0

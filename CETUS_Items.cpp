@@ -17,8 +17,9 @@ Item::Item(){
 		
 }
 
-Item::Item(string newName, string newDesc, string roomDesc, int newPower, int newHealing, bool newWeapon, bool feature, bool collect){
+Item::Item(string newID, string newName, string newDesc, string roomDesc, int newPower, int newHealing, bool newWeapon, bool feature, bool collect){
 	
+	this->ID = newID;
 	this->Name = newName;
 	this->Description = newDesc;
 	this->roomDescription = roomDesc;
@@ -29,6 +30,11 @@ Item::Item(string newName, string newDesc, string roomDesc, int newPower, int ne
 	this->collectible = collect;
 	return;	
 	
+}
+
+
+string Item::getID(){
+	return this->ID;
 }
 
 

@@ -1,0 +1,9 @@
+Description=The statues have been smashed beyond recognition.  There is some debris lying around the bases.
+Healing=0
+ID=normHidOrnStatues
+Name=Statues
+Power=0
+collectible=0
+roomDescription=The broken bases of two statues flank the door to the south
+roomFeature=1
+weapon=0

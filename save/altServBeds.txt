@@ -1,0 +1,9 @@
+Description=The beds are old, small, and narrow.
+Healing=0
+ID=altServBeds
+Name=Servant Beds
+Power=0
+collectible=0
+roomDescription=There are a couple beds in the room.
+roomFeature=1
+weapon=0

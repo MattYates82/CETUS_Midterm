@@ -1,0 +1,9 @@
+Description=The paint on the bannster is chipped and faded.
+Healing=0
+ID=normBannister
+Name=Bannister
+Power=0
+collectible=0
+roomDescription=There is a small bannister on the open side of the staircase.
+roomFeature=1
+weapon=0

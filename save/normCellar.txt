@@ -1,0 +1,13 @@
+ID=normCellar
+Item01=normWineRack
+Item02=normDistDust
+Name=Cellar
+adj0=NULL
+adj1=NULL
+adj2=NULL
+adj3=normHidEntry
+adj4=normKitchen
+adj5=NULL
+longDesc=The mansion cellar is dark with an earthen floor and a musty smell.  Cobwebs hang heavily from the ceiling.
+shortDesc=The mansion cellar
+visited=0

@@ -1,0 +1,13 @@
+ID=normCem2
+Item01=normStonewall
+Item02=normMausoleum
+Name=Cemetery North
+adj0=
+adj1=normCem1
+adj2=NULL
+adj3=NULL
+adj4=NULL
+adj5=NULL
+longDesc=A large field of gravestones lay around, bordered on the north by a dark, ominous forest.
+shortDesc=Another graveyard.
+visited=0

@@ -1,0 +1,9 @@
+Description=The TV is the most modern thing you've seen in the mansion yet, and it's still a tube TV that looks 30 years old.
+Healing=0
+ID=normTV
+Name=TV
+Power=0
+collectible=0
+roomDescription=There is a TV in one corner of the room.
+roomFeature=1
+weapon=0

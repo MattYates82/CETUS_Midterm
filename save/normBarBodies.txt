@@ -1,0 +1,9 @@
+Description=You recognize a few of the bar regulars.  From the expression on their faces, they died scared.
+Healing=0
+ID=normBarBodies
+Name=Bodies
+Power=0
+collectible=0
+roomDescription=A few bodies are scattered around the bar.
+roomFeature=1
+weapon=0

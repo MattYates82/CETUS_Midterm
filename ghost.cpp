@@ -60,6 +60,22 @@ string Ghost::getName(){
  *********************************************************************/
 void Ghost::getDesc(){
     if(this->isDead(0)){
+        cout << "A pile of ectoplasmic goo.  Someone blows their nose, and you wanna look at it?" << endl;
+    } else{
+        cout << "A floating translucent entity hovering just above the floor.  It doesn't look happy." << endl;
+    }
+    return;
+}
+
+/*********************************************************************
+ ** Function: getRoomDesc()
+ ** Description: returns description
+ ** Parameters: none
+ ** Pre-Conditions: none
+ ** Post-Conditions: none
+ *********************************************************************/
+void Ghost::getRoomDesc(){
+    if(this->isDead(0)){
         cout << "A pile of ectoplasmic goo lies at your feet." << endl;
     } else{
         cout << "A raging Ghost stares at you ready to strike!" << endl;

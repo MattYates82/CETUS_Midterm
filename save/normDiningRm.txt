@@ -1,0 +1,13 @@
+ID=normDiningRm
+Item01=normTable
+Item02=normChinaCab
+Name=Dining Room
+adj0=NULL
+adj1=normFoyer
+adj2=normServant
+adj3=normKitchen
+adj4=NULL
+adj5=NULL
+longDesc=The mansion dining room.
+shortDesc=The mansion dining room.
+visited=0

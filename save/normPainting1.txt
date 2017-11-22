@@ -1,0 +1,9 @@
+Description=It depicts fishermen on a small boat.
+Healing=0
+ID=normPainting1
+Name=Painting
+Power=0
+collectible=0
+roomDescription=A painting hangs on the west wall.
+roomFeature=1
+weapon=0

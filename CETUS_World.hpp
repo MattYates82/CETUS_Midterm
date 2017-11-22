@@ -18,7 +18,8 @@ class World {
 		Player*	currentPlayer;
 		bool	realWorld;
 		std::vector<Room*> worldRooms; 
-	
+        int act;
+    
 	public:
 	
 		World();
@@ -46,11 +47,13 @@ class World {
 		void printInventory();
 		void printRoomInventory();
 		void printAdjacent(int direction);
-		void move(int direction);
+		int move(int direction);
 		void printLogo();
 		void ClearScreen();
 		void cetusPrint(string* inText, int color);
 		std::vector<Room*> getRooms();
-	
+        int getAct();
+        void incrementAct();
+        int actController(string);
 };
 #endif

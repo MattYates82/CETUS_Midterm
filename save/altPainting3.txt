@@ -1,0 +1,9 @@
+Description=The figure rising out of the ocean has a look of rage and death now.  There is blood on the tips of the trident.
+Healing=0
+ID=altPainting3
+Name=Painting
+Power=0
+collectible=0
+roomDescription=A painting hangs on the east wall.
+roomFeature=1
+weapon=0

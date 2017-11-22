@@ -1,0 +1,9 @@
+Description= A corner store, 50 cent special.  Still has a little fluid in it.
+Healing=0
+ID=Lighter
+Name=Lighter
+Power=0
+collectible=1
+roomDescription= A disposable lighter can be seen.
+roomFeature=0
+weapon=0

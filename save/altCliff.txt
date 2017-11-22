@@ -1,0 +1,9 @@
+Description=The cliff drops precipitously to the sea.  The rocks at the bottom look jagged as knives.
+Healing=0
+ID=altCliff
+Name=Cliff
+Power=0
+collectible=0
+roomDescription=The forest ends abruptly in the sudden drop of a cliff.
+roomFeature=1
+weapon=0

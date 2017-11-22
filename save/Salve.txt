@@ -1,0 +1,9 @@
+Description= A sickly green, mucousy fluid suspended in a corked test tube, its contents almost giving off a glow.
+Healing=20
+ID=Salve
+Name=Strange Salve
+Power=0
+collectible=1
+roomDescription= An odd liquid in a sealed vial sits by itself.
+roomFeature=0
+weapon=0

@@ -1,0 +1,9 @@
+Description=You turn on the faucet and splash some water on your face.
+Healing=0
+ID=normBathSink
+Name=Sink
+Power=0
+collectible=0
+roomDescription=There is a sink on the wall opposite the bath tub.
+roomFeature=1
+weapon=0

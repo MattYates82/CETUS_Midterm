@@ -1,0 +1,9 @@
+Description=There are some robes on the shelved.  They don't look like they would fit anything human.
+Healing=0
+ID=altHidStorShelves
+Name=Shelves
+Power=0
+collectible=0
+roomDescription=There are shelves on one wall of the room.
+roomFeature=1
+weapon=0

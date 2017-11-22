@@ -1,0 +1,9 @@
+Description=The fishermen in this picture are grotesque, snakelike parodies of humans.  They slither across the deck of a ship in a sea the color of blood.
+Healing=0
+ID=altPainting1
+Name=Painting
+Power=0
+collectible=0
+roomDescription=A painting hangs on the west wall.
+roomFeature=1
+weapon=0

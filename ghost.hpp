@@ -18,7 +18,7 @@ public:
     int attack();
     string getName();
     void getDesc();
-    
+    void getRoomDesc();
 };
 
 #endif 

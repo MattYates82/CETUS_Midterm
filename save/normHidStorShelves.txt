@@ -1,0 +1,9 @@
+Description=You find some dusty old robes.  There's nothing really useful here.
+Healing=0
+ID=normHidStorShelves
+Name=Shelves
+Power=0
+collectible=0
+roomDescription=There are shelves on one wall of the room.
+roomFeature=1
+weapon=0

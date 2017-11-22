@@ -1,0 +1,9 @@
+Description=The old gate showns some signs of rust and wear.  It doesn't look like the property has been kept up too well.
+Healing=0
+ID=normMansGate
+Name=Mansion Gate
+Power=0
+collectible=0
+roomDescription=The wrought iron gate at the front of the driveway stands open.
+roomFeature=1
+weapon=0

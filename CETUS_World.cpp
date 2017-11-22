@@ -36,6 +36,7 @@ using std::string;
 		this->Description = ' ';
 		this->currentPlayer = NULL;
 		this->realWorld = true;
+        this->act = 1;
 		//this->currentPlayer->setCurrentRoom(NULL);
 		//this->currentPlayer->setNeighbors(NULL);		
 		
@@ -46,6 +47,7 @@ using std::string;
 		Player temp = Player(current, currentHealth, currentMoves, currentSpecialCount);
 		this->currentPlayer = &temp;
 		this->realWorld = true;
+        this->act=1;
 
 	}
 		
@@ -140,7 +142,7 @@ using std::string;
 		
 		for (int i = 0; i < this->currentPlayer->inventory.size(); i++){
 			
-			if (this->currentPlayer->inventory[i]->getName().compare(current)){
+			if (!this->currentPlayer->inventory[i]->getName().compare(current)){
 				
 				return this->currentPlayer->inventory[i];
 			}
@@ -150,34 +152,35 @@ using std::string;
 		return NULL;
 		
 	}
+
 	
 	Item* World::findItem(string current, bool drop){
-		
-		string tempString;
-		std::transform(current.begin(), current.end(), current.begin(), ::tolower);
-        
-        Player* temp = this->currentPlayer;
-		
-		for (int i = 0; i < temp->inventory.size(); i++){
 			
-			tempString = temp->inventory[i]->getName();
-			std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
+			string tempString;
+			std::transform(current.begin(), current.end(), current.begin(), ::tolower);
 			
-			if (tempString.compare(0, tempString.size() -1, current)){
+			Player* temp = this->currentPlayer;
+			
+			for (int i = 0; i < temp->inventory.size(); i++){
 				
-				Item* currentItem = temp->inventory[i];
+				tempString = temp->inventory[i]->getName();
+				std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
 				
-				if(drop == true){
-					temp->inventory.erase(temp->inventory.begin()+i);
+				if (tempString.compare(0, tempString.size() -1, current)){
+					
+					Item* currentItem = temp->inventory[i];
+					
+					if(drop == true){
+						temp->inventory.erase(temp->inventory.begin()+i);
+					}
+					
+					return currentItem;
 				}
 				
-				return currentItem;
 			}
 			
-		}
-		
-		return NULL;
-		
+			return NULL;
+			
 	}
 	
 	Item* World::findRoomItem(string current, bool drop){
@@ -185,7 +188,7 @@ using std::string;
         std::string tempString;
         std::transform(current.begin(), current.end(), current.begin(), ::tolower);
         for (int i = 0; i < this->currentPlayer->currentRoom->roomItems.size(); i++){
-            if(this->currentPlayer->currentRoom->roomItems[i] != nullptr){
+            if(this->currentPlayer->currentRoom->roomItems[i] != NULL){
                 tempString = this->currentPlayer->currentRoom->roomItems[i]->getName();
                 std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
                 if (!tempString.compare(current)){
@@ -271,14 +274,14 @@ using std::string;
 		Player* temp = this->currentPlayer;
 		if (temp->currentRoom->roomItems.size() == 0) { 
 		
-			cout << "Player has no items in inventory." << endl;
+			//cout << "Player has no items in inventory." << endl;
 			return;
 		}
 		
 		for (int i = 0; i < temp->currentRoom->roomItems.size(); i++){
 			
 			if (temp->currentRoom->roomItems[i] != NULL){
-				cout << temp->currentRoom->roomItems[i]->getName();
+				cout << "  " << temp->currentRoom->roomItems[i]->getRoomDescription();
 			}
 		}
 		
@@ -322,8 +325,8 @@ using std::string;
 		
 	}
 	
-	void World::move(int direction){
-		
+	int World::move(int direction){
+        int moveFlag=0;
 		Player* temp = this->currentPlayer;
 		
 		switch(direction){
@@ -332,6 +335,7 @@ using std::string;
                 if(temp->currentRoom->neighbors->north != NULL){
                     temp->setCurrentRoom(temp->currentRoom->neighbors->north);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
+                    moveFlag=1;
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");
                 }
@@ -341,6 +345,7 @@ using std::string;
                 if(temp->currentRoom->neighbors->south != NULL){
                     temp->setCurrentRoom(temp->currentRoom->neighbors->south);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
+                    moveFlag=1;
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");
                 }
@@ -350,6 +355,7 @@ using std::string;
                 if(temp->currentRoom->neighbors->east != NULL){
                     temp->setCurrentRoom(temp->currentRoom->neighbors->east);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
+                    moveFlag=1;
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");
                 }
@@ -357,8 +363,9 @@ using std::string;
 			
 			case WEST:
                 if(temp->currentRoom->neighbors->west != NULL){
-                    temp->setCurrentRoom(temp->currentRoom->neighbors->east);
+                    temp->setCurrentRoom(temp->currentRoom->neighbors->west);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
+                    moveFlag=1;
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");
                 }
@@ -368,6 +375,7 @@ using std::string;
                 if(temp->currentRoom->neighbors->up != NULL){
                     temp->setCurrentRoom(temp->currentRoom->neighbors->up);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
+                    moveFlag=1;
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");
                 }
@@ -377,6 +385,7 @@ using std::string;
                 if(temp->currentRoom->neighbors->down != NULL){
                     temp->setCurrentRoom(temp->currentRoom->neighbors->down);
                     temp->setNeighbors(temp->currentRoom->getNeighbors());
+                    moveFlag=1;
                 } else {
                     printf("\nThere is no apparent exit in that direction.\n");
                 }
@@ -388,7 +397,7 @@ using std::string;
 			
 		}
         
-		return;
+		return moveFlag;
 	}
 	
 	
@@ -509,3 +518,61 @@ using std::string;
 	std::vector<Room*> World::getRooms() {
 		return this->worldRooms;
 	}
+
+int World::getAct(){
+    return this->act;
+}
+
+void World::incrementAct(){
+    this->act++;
+}
+
+int World::actController(string item){
+    
+    std::string ritualInterrupt = "Shrouded figures surround the altar.  There is a gutteral chanting from all. Taking a few steps further, you see a sphere of mystical energy surrounding the altar.  Walking forward in astonishment, you catch the attention of one of the figures.  When his focus breaks, the sphere shatters into jagged pieces of energy, and creates a vacuum.  Chanting turns to screams and groans as the robed figures start getting sucked in.  Others try to hold on.  You aren't so lucky.  One of the robed figures uses you to work his way toward the door.  You are flung toward the energy vortex, and everything goes dark.";
+    std::string touchAltar = "You touched the altar. Your body fragments as you pass through the dimensional rift.\n";
+    std::string touchBear = "You touched the bear. Your body fragments as you pass through the dimensional rift.\n";
+    Room* target = NULL;
+    int moveAct=0;
+    //end of first act
+    if(this->getPlayer()->getCurrentRoom()->getID() == "normLair" && this->getAct() == 1 && item == "Altar"){
+        cout << std::endl << ritualInterrupt << endl;
+        this->incrementAct();
+        //removeItem(ritual);
+        for(int i=0; i< worldRooms.size(); i++){
+            if(this->worldRooms[i]->getID() == "altLair"){
+                target = this->worldRooms[i];
+                moveAct=1;
+            }
+        }
+       
+    }
+    //going back into bad dimension
+    if(!moveAct && this->getPlayer()->getCurrentRoom()->getID() == "normLair" && this->getAct() == 2 && item == "Altar"){
+        cout << std::endl << touchAltar << endl;
+        for(int i=0; i< worldRooms.size(); i++){
+            if(this->worldRooms[i]->getID() == "altLair"){
+                target = this->worldRooms[i];
+                moveAct=1;
+            }
+        }
+       
+    }
+
+    
+    //inspecting bear
+    if(!moveAct && this->getPlayer()->getCurrentRoom()->getID() == "altBed1" && this->getAct() == 2 && item == "Doll"){
+        cout << std::endl << touchBear << endl;
+        for(int i=0; i< worldRooms.size(); i++){
+            if(this->worldRooms[i]->getID() == "normBed1"){
+                target = this->worldRooms[i];
+                moveAct=1;
+            }
+        }
+      
+    }
+    if(moveAct){
+        this->setCurrentRoom(target);
+    }
+    return moveAct;
+}

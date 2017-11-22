@@ -248,4 +248,3 @@ Room* List::getAdjName(int dir) {
 	}
 	return tempRoom;
 }
-

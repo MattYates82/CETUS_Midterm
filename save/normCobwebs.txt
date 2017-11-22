@@ -1,0 +1,9 @@
+Description=The cobwebs are thick and look as if they've built up over years.
+Healing=0
+ID=normCobwebs
+Name=Cobwebs
+Power=0
+collectible=0
+roomDescription=Cobwebs hang in the corners of the ceiling.
+roomFeature=1
+weapon=0

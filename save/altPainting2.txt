@@ -1,0 +1,9 @@
+Description=The ocean in this seascape is blood red.  You can see strange things floating in the water.
+Healing=0
+ID=altPainting2
+Name=Painting
+Power=0
+collectible=0
+roomDescription=A painting hangs on the east wall.
+roomFeature=1
+weapon=0

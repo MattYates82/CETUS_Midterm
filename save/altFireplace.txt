@@ -1,0 +1,9 @@
+Description=You can see old bones mixed in with the ash in the fireplace.
+Healing=0
+ID=altFireplace
+Name=Fireplace
+Power=0
+collectible=0
+roomDescription=A fireplace is set into the east wall.
+roomFeature=1
+weapon=0

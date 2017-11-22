@@ -1,0 +1,9 @@
+Description=The markings seem to be in some strange and utterly alien language.  They seem to writhe in your mind as you try to read them.
+Healing=0
+ID=altMarkings1
+Name=Markings
+Power=0
+collectible=0
+roomDescription=Strange markings have been chiseled into the wall.
+roomFeature=1
+weapon=0
